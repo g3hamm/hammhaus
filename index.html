@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hammhaus CSS Style Guide</title>
+    <meta
+      name="description"
+      content="Hammhaus is a reusable CSS system by Geoffrey Hamm. Motto: Hamm follows form."
+    >
+    <link rel="stylesheet" href="./hammhaus.css">
+    <link rel="stylesheet" href="./style-guide.css">
+  </head>
+  <body class="sg-page">
+    <div class="hh-cursor" aria-hidden="true">
+      <span class="hh-cursor__ring"></span>
+      <span class="hh-cursor__dot"></span>
+    </div>
+    <nav class="hh-nav" aria-label="Primary navigation">
+      <div class="hh-container--wide hh-nav__inner">
+        <a class="hh-brand" href="#top" aria-label="Hammhaus home">
+          <span class="hh-mark" aria-hidden="true"><span></span><span></span></span>
+          <span>Hammhaus</span>
+        </a>
+        <div class="hh-nav__links" aria-label="Style guide sections">
+          <a href="#principles">Principles</a>
+          <a href="#tokens">Tokens</a>
+          <a href="#showcase">Showcase</a>
+          <a href="#components">Components</a>
+          <a href="#patterns">Patterns</a>
+          <a href="#use">Use</a>
+        </div>
+        <div class="sg-nav-download">
+          <a class="hh-button hh-button--primary hh-button--small" href="./hammhaus.css" download="hammhaus.css">
+            <svg class="sg-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v12"></path>
+              <path d="m7 10 5 5 5-5"></path>
+              <path d="M5 21h14"></path>
+            </svg>
+            Download CSS
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <main id="top">
+      <section class="sg-hero hh-section--paper" aria-labelledby="hero-title">
+        <div class="sg-hero__poster" aria-hidden="true">Hammhaus</div>
+        <div class="sg-hero__kinetics" aria-hidden="true">
+          <span class="sg-kinetic sg-kinetic--circle"></span>
+          <span class="sg-kinetic sg-kinetic--square"></span>
+          <span class="sg-kinetic sg-kinetic--triangle"></span>
+          <span class="sg-kinetic sg-kinetic--ring"></span>
+        </div>
+        <div class="hh-container--wide sg-hero__grid">
+          <div class="hh-stack sg-hero__copy" style="--hh-stack-gap: var(--hh-space-5);">
+            <span class="hh-kicker">Geoffrey Hamm presents</span>
+            <h1 class="sg-hero__title" id="hero-title">Hammhaus</h1>
+            <p class="hh-lede">
+              A reusable CSS system with poster-grade presence, paper-and-ink discipline, primary-color conviction,
+              and enough component muscle to move from brand theater into serious product work.
+            </p>
+            <div class="hh-cluster sg-hero__actions">
+              <span class="hh-hero__motto">Hamm follows form</span>
+              <a class="hh-button hh-button--blue" href="./hammhaus.css" download="hammhaus.css">
+                <svg class="sg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3v12"></path>
+                  <path d="m7 10 5 5 5-5"></path>
+                  <path d="M5 21h14"></path>
+                </svg>
+                Download Hammhaus.css
+              </a>
+            </div>
+            <dl class="sg-hero__stats" aria-label="Hammhaus highlights">
+              <div><dt>01</dt><dd>Pure CSS system</dd></div>
+              <div><dt>24+</dt><dd>Reusable patterns</dd></div>
+              <div><dt>0</dt><dd>Runtime dependencies</dd></div>
+            </dl>
+          </div>
+          <div class="sg-hero__specimen">
+            <img src="./assets/hammhaus-specimen.svg" alt="Hammhaus CSS specimen board">
+          </div>
+        </div>
+      </section>
+
+      <div class="sg-band">
+        <div class="hh-marquee" aria-hidden="true">
+          <div class="hh-marquee__track">
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--red"></span>HAMM FOLLOWS FORM</span>
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--blue"></span>PAPER, INK, ACTION</span>
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--yellow"></span>USEFUL BEFORE ORNAMENTAL</span>
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--green"></span>PORTABLE BY DEFAULT</span>
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--red"></span>HAMM FOLLOWS FORM</span>
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--blue"></span>PAPER, INK, ACTION</span>
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--yellow"></span>USEFUL BEFORE ORNAMENTAL</span>
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--green"></span>PORTABLE BY DEFAULT</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="hh-section hh-section--white" id="principles" aria-labelledby="principles-title">
+        <div class="hh-container">
+          <div class="sg-section-head">
+            <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);">
+              <span class="hh-kicker">01 / Principles</span>
+              <h2 class="hh-display" id="principles-title">The system has a spine.</h2>
+            </div>
+          </div>
+          <div class="hh-grid" style="--hh-grid-min: 16rem;">
+            <article class="hh-card hh-card--hard">
+              <span class="hh-badge">Editorial</span>
+              <h3 class="hh-section-title">Lead with hierarchy</h3>
+              <p class="hh-muted">Big type, honest contrast, and strong alignment do most of the expressive work.</p>
+            </article>
+            <article class="hh-card">
+              <span class="hh-badge hh-badge--blue">Portable</span>
+              <h3 class="hh-section-title">Prefix the public API</h3>
+              <p class="hh-muted">Reusable components use <code class="hh-code">hh-</code> classes so projects can adopt Hammhaus gradually.</p>
+            </article>
+            <article class="hh-card">
+              <span class="hh-badge hh-badge--red">Practical</span>
+              <h3 class="hh-section-title">Make states visible</h3>
+              <p class="hh-muted">Focus, hover, success, warning, error, disabled, and selected states are first-class citizens.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="hh-section hh-section--paper" id="tokens" aria-labelledby="tokens-title">
+        <div class="hh-container">
+          <div class="sg-section-head">
+            <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);">
+              <span class="hh-kicker">02 / Tokens</span>
+              <h2 class="hh-display" id="tokens-title">Colors that know their job.</h2>
+            </div>
+          </div>
+
+          <div class="hh-grid sg-token-grid">
+            <div class="hh-swatch" style="--hh-swatch: var(--hh-paper);">
+              <span class="hh-swatch__color"></span>
+              <span class="hh-swatch__meta"><strong>Paper</strong><span>--hh-paper</span><span>#f2ead9</span></span>
+            </div>
+            <div class="hh-swatch" style="--hh-swatch: var(--hh-ink);">
+              <span class="hh-swatch__color"></span>
+              <span class="hh-swatch__meta"><strong>Ink</strong><span>--hh-ink</span><span>#111111</span></span>
+            </div>
+            <div class="hh-swatch" style="--hh-swatch: var(--hh-red);">
+              <span class="hh-swatch__color"></span>
+              <span class="hh-swatch__meta"><strong>Red</strong><span>--hh-red</span><span>#d83224</span></span>
+            </div>
+            <div class="hh-swatch" style="--hh-swatch: var(--hh-blue);">
+              <span class="hh-swatch__color"></span>
+              <span class="hh-swatch__meta"><strong>Blue</strong><span>--hh-blue</span><span>#153b8a</span></span>
+            </div>
+            <div class="hh-swatch" style="--hh-swatch: var(--hh-yellow);">
+              <span class="hh-swatch__color"></span>
+              <span class="hh-swatch__meta"><strong>Yellow</strong><span>--hh-yellow</span><span>#f5c542</span></span>
+            </div>
+            <div class="hh-swatch" style="--hh-swatch: var(--hh-green);">
+              <span class="hh-swatch__color"></span>
+              <span class="hh-swatch__meta"><strong>Green</strong><span>--hh-green</span><span>#007f5f</span></span>
+            </div>
+          </div>
+
+          <div class="hh-stack hh-mt-6" style="--hh-stack-gap: var(--hh-space-4);">
+            <h3 class="hh-section-title">Type scale</h3>
+            <div class="sg-type-row">
+              <span class="hh-label">Hero</span>
+              <span class="hh-display" style="font-size: var(--hh-type-hero);">Form follows Hamm.</span>
+            </div>
+            <div class="sg-type-row">
+              <span class="hh-label">Display</span>
+              <span class="hh-display">Hammhaus builds rhythm.</span>
+            </div>
+            <div class="sg-type-row">
+              <span class="hh-label">Title</span>
+              <span class="hh-title">Sharp enough for launches, calm enough for dashboards.</span>
+            </div>
+            <div class="sg-type-row">
+              <span class="hh-label">Body</span>
+              <span class="hh-lede">Readable body copy keeps the theater useful. The system has range without losing its accent.</span>
+            </div>
+            <div class="sg-type-row">
+              <span class="hh-label">Mono</span>
+              <span class="hh-mono sg-mono-specimen">JetBrains Mono / system tokens / .hh-code / 0123456789</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hh-section hh-section--ink sg-showcase" id="showcase" aria-labelledby="showcase-title">
+        <div class="hh-container">
+          <div class="sg-section-head">
+            <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);">
+              <span class="hh-kicker">03 / Showcase</span>
+              <h2 class="hh-display" id="showcase-title">The bells. The whistles. The discipline.</h2>
+            </div>
+          </div>
+          <div class="sg-stage" role="img" aria-label="Hammhaus showcase collage">
+            <div class="sg-stage__rail">
+              <span>FORM</span>
+              <span>COLOR</span>
+              <span>TYPE</span>
+              <span>STATE</span>
+            </div>
+            <div class="sg-stage__poster">
+              <span class="hh-kicker">Live surface</span>
+              <strong>Hammhaus</strong>
+              <p>Every component has weight, contrast, motion, and a job.</p>
+              <div class="hh-cluster">
+                <span class="hh-badge">Ready</span>
+                <span class="hh-chip"><span class="hh-dot hh-dot--blue"></span>Tokens</span>
+                <span class="hh-chip"><span class="hh-dot hh-dot--red"></span>States</span>
+              </div>
+            </div>
+            <div class="sg-stage__console">
+              <div class="sg-stage__bar"><span></span><span></span><span></span></div>
+              <pre><code>.launch {
+  --hh-bg: var(--hh-ink);
+  --hh-fg: var(--hh-paper);
+  --hh-accent: var(--hh-yellow);
+}</code></pre>
+            </div>
+            <div class="sg-stage__form">
+              <label class="hh-field">
+                <span class="hh-label">Signal</span>
+                <input class="hh-input" value="High contrast">
+              </label>
+              <button class="hh-button hh-button--yellow hh-button--block" type="button">Make it sing</button>
+            </div>
+            <div class="sg-stage__shapes" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hh-section hh-section--blue" aria-labelledby="sections-title">
+        <div class="hh-container">
+          <div class="sg-section-head">
+            <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);">
+              <span class="hh-kicker">04 / Sections</span>
+              <h2 class="hh-display" id="sections-title">Full bands, no timid panels.</h2>
+            </div>
+          </div>
+          <div class="sg-section-sampler">
+            <div class="sg-mini-section hh-section--paper">
+              <span class="hh-kicker">Paper</span>
+              <strong>Default canvas</strong>
+            </div>
+            <div class="sg-mini-section hh-section--ink">
+              <span class="hh-kicker">Ink</span>
+              <strong>Maximum contrast</strong>
+            </div>
+            <div class="sg-mini-section hh-section--blue">
+              <span class="hh-kicker">Blue</span>
+              <strong>Institutional punch</strong>
+            </div>
+            <div class="sg-mini-section hh-section--red">
+              <span class="hh-kicker">Red</span>
+              <strong>High attention</strong>
+            </div>
+            <div class="sg-mini-section hh-section--yellow">
+              <span class="hh-kicker">Yellow</span>
+              <strong>Signal and warmth</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hh-section hh-section--white" id="components" aria-labelledby="components-title">
+        <div class="hh-container">
+          <div class="sg-section-head">
+            <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);">
+              <span class="hh-kicker">05 / Components</span>
+              <h2 class="hh-display" id="components-title">Buttons, fields, cards, and the useful bits between.</h2>
+            </div>
+          </div>
+
+          <div class="hh-grid" style="--hh-grid-min: 20rem; --hh-grid-gap: var(--hh-space-6);">
+            <article class="sg-demo">
+              <h3 class="hh-section-title">Buttons</h3>
+              <div class="hh-cluster">
+                <a class="hh-button hh-button--primary" href="#use">
+                  <svg class="sg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                  Primary
+                </a>
+                <button class="hh-button hh-button--blue" type="button">Blue</button>
+                <button class="hh-button hh-button--yellow" type="button">Yellow</button>
+                <button class="hh-button hh-button--ghost" type="button">Ghost</button>
+                <button class="hh-button hh-button--small" type="button">Small</button>
+                <button class="hh-button" type="button" disabled>Disabled</button>
+              </div>
+              <div class="hh-toolbar" aria-label="Example toolbar">
+                <button class="hh-icon-button" type="button" aria-label="Align left">
+                  <svg class="sg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"></path><path d="M4 12h10"></path><path d="M4 18h16"></path></svg>
+                </button>
+                <button class="hh-icon-button" type="button" aria-label="Bold">
+                  <svg class="sg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h6a4 4 0 0 1 0 8H7z"></path><path d="M7 13h7a4 4 0 0 1 0 8H7z"></path></svg>
+                </button>
+                <button class="hh-icon-button" type="button" aria-label="Send">
+                  <svg class="sg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                </button>
+              </div>
+            </article>
+
+            <article class="sg-demo">
+              <h3 class="hh-section-title">Text inputs</h3>
+              <form class="hh-form">
+                <label class="hh-field">
+                  <span class="hh-label">Name</span>
+                  <input class="hh-input" type="text" value="Geoffrey Hamm">
+                </label>
+                <label class="hh-field hh-field--success">
+                  <span class="hh-label">Project type</span>
+                  <select class="hh-select">
+                    <option>Brand system</option>
+                    <option>Product app</option>
+                    <option>Editorial site</option>
+                  </select>
+                  <span class="hh-help">Looks good.</span>
+                </label>
+                <label class="hh-field hh-field--error">
+                  <span class="hh-label">Budget signal</span>
+                  <input class="hh-input" type="text" value="Too vague">
+                  <span class="hh-help">Use a range so the form can move.</span>
+                </label>
+              </form>
+            </article>
+
+            <article class="sg-demo">
+              <h3 class="hh-section-title">Textarea and choices</h3>
+              <form class="hh-form">
+                <label class="hh-field">
+                  <span class="hh-label">Brief</span>
+                  <textarea class="hh-textarea" placeholder="Make it useful, then make it sing."></textarea>
+                </label>
+                <label class="hh-check">
+                  <input type="checkbox" checked>
+                  <span><strong>Include launch polish</strong><br><span class="hh-help">Motion and focus states are part of the work.</span></span>
+                </label>
+                <label class="hh-radio">
+                  <input name="tone" type="radio" checked>
+                  <span>Editorial</span>
+                </label>
+                <label class="hh-switch">
+                  <input type="checkbox" checked>
+                  <span class="hh-switch__track" aria-hidden="true"></span>
+                  <span>High contrast</span>
+                </label>
+              </form>
+            </article>
+
+            <article class="sg-demo">
+              <h3 class="hh-section-title">Cards and badges</h3>
+              <div class="hh-grid" style="--hh-grid-min: 12rem;">
+                <div class="hh-card">
+                  <span class="hh-badge">New</span>
+                  <h4 class="hh-subhead">A clean block</h4>
+                  <p class="hh-muted">Use for repeated content, feature summaries, and grouped actions.</p>
+                </div>
+                <div class="hh-card hh-card--inverse">
+                  <span class="hh-badge">Hot</span>
+                  <h4 class="hh-subhead">An inverse block</h4>
+                  <p class="hh-muted">Good for emphasis when the surrounding section is quiet.</p>
+                </div>
+              </div>
+              <div class="hh-cluster">
+                <span class="hh-chip"><span class="hh-dot hh-dot--red"></span>Redline</span>
+                <span class="hh-chip"><span class="hh-dot hh-dot--blue"></span>Review</span>
+                <span class="hh-chip"><span class="hh-dot hh-dot--green"></span>Live</span>
+              </div>
+            </article>
+
+            <article class="sg-demo">
+              <h3 class="hh-section-title">Alerts and progress</h3>
+              <div class="hh-alert hh-alert--info">
+                <span class="hh-dot hh-dot--blue" aria-hidden="true"></span>
+                <div><strong>Info</strong><br><span class="hh-muted">Use when a user should know something before moving on.</span></div>
+              </div>
+              <div class="hh-alert hh-alert--warning">
+                <span class="hh-dot hh-dot--yellow" aria-hidden="true"></span>
+                <div><strong>Warning</strong><br><span class="hh-muted">Use when the action has consequence.</span></div>
+              </div>
+              <div class="hh-progress">
+                <div class="hh-cluster hh-justify-between">
+                  <span class="hh-label hh-mb-0">System readiness</span>
+                  <span class="hh-mono">74%</span>
+                </div>
+                <div class="hh-progress__track"><span class="hh-progress__bar" style="--hh-progress: 74%;"></span></div>
+              </div>
+            </article>
+
+            <article class="sg-demo">
+              <h3 class="hh-section-title">Tabs and segmented controls</h3>
+              <div class="hh-tabs" role="tablist" aria-label="Example tabs">
+                <button class="hh-tab" type="button" role="tab" aria-selected="true">Build</button>
+                <button class="hh-tab" type="button" role="tab" aria-selected="false">Ship</button>
+                <button class="hh-tab" type="button" role="tab" aria-selected="false">Learn</button>
+              </div>
+              <div class="hh-segmented" aria-label="Example segmented control">
+                <button class="hh-segment" type="button" aria-pressed="true">Day</button>
+                <button class="hh-segment" type="button" aria-pressed="false">Week</button>
+                <button class="hh-segment" type="button" aria-pressed="false">Month</button>
+              </div>
+              <div class="hh-stat-grid">
+                <div class="hh-stat"><span class="hh-stat__value">12</span><span class="hh-stat__label">Components</span></div>
+                <div class="hh-stat"><span class="hh-stat__value">6</span><span class="hh-stat__label">Core colors</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="hh-section hh-section--paper" id="patterns" aria-labelledby="patterns-title">
+        <div class="hh-container">
+          <div class="sg-section-head">
+            <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);">
+              <span class="hh-kicker">06 / Patterns</span>
+              <h2 class="hh-display" id="patterns-title">Enough structure for real pages.</h2>
+            </div>
+          </div>
+
+          <div class="hh-grid" style="--hh-grid-min: 24rem; --hh-grid-gap: var(--hh-space-6);">
+            <div class="sg-demo">
+              <h3 class="hh-section-title">Timeline</h3>
+              <ol class="hh-timeline">
+                <li class="hh-timeline__item">
+                  <time class="hh-timeline__time">Step 01</time>
+                  <div><strong>Install</strong><p class="hh-muted">Link the stylesheet and inherit the base tokens.</p></div>
+                </li>
+                <li class="hh-timeline__item">
+                  <time class="hh-timeline__time">Step 02</time>
+                  <div><strong>Compose</strong><p class="hh-muted">Use sections, stacks, grids, cards, and form controls.</p></div>
+                </li>
+                <li class="hh-timeline__item">
+                  <time class="hh-timeline__time">Step 03</time>
+                  <div><strong>Theme</strong><p class="hh-muted">Override custom properties at the project or section level.</p></div>
+                </li>
+              </ol>
+            </div>
+
+            <div class="sg-demo">
+              <h3 class="hh-section-title">Accordion</h3>
+              <div class="hh-accordion">
+                <details open>
+                  <summary>When should I use Hammhaus?</summary>
+                  <div class="hh-accordion__body">Use it for editorial portfolios, crisp landing pages, internal tools, and prototypes that need a strong point of view.</div>
+                </details>
+                <details>
+                  <summary>How do I customize it?</summary>
+                  <div class="hh-accordion__body">Override the <code class="hh-code">--hh-*</code> tokens globally or inside a section, then keep using the same classes.</div>
+                </details>
+                <details>
+                  <summary>Does it require JavaScript?</summary>
+                  <div class="hh-accordion__body">No. The reusable stylesheet is pure CSS.</div>
+                </details>
+              </div>
+            </div>
+
+            <div class="sg-demo sg-demo--dark">
+              <h3 class="hh-section-title">Dark surface</h3>
+              <p class="hh-lede">The same components switch contexts with section variables.</p>
+              <div class="hh-cluster">
+                <button class="hh-button hh-button--yellow" type="button">Approve</button>
+                <button class="hh-button hh-button--ghost" type="button">Review</button>
+              </div>
+              <div class="hh-alert hh-alert--success">
+                <span class="hh-dot hh-dot--green" aria-hidden="true"></span>
+                <div><strong>Passed</strong><br><span class="hh-muted">Contrast and focus states remain legible.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <article class="sg-demo sg-table-showcase hh-mt-6">
+            <div class="hh-cluster hh-justify-between">
+              <div>
+                <span class="hh-kicker">Standalone pattern</span>
+                <h3 class="hh-section-title">Table</h3>
+              </div>
+              <span class="hh-chip"><span class="hh-dot hh-dot--green"></span>No section scroll</span>
+            </div>
+            <div class="hh-table-wrap">
+              <table class="hh-table">
+                <thead>
+                  <tr>
+                    <th>Class</th>
+                    <th>Use</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code class="hh-code">.hh-button</code></td>
+                    <td>Actions and commands</td>
+                    <td><span class="hh-chip"><span class="hh-dot hh-dot--green"></span>Ready</span></td>
+                  </tr>
+                  <tr>
+                    <td><code class="hh-code">.hh-card</code></td>
+                    <td>Repeated content</td>
+                    <td><span class="hh-chip"><span class="hh-dot hh-dot--blue"></span>Stable</span></td>
+                  </tr>
+                  <tr>
+                    <td><code class="hh-code">.hh-field</code></td>
+                    <td>Forms and validation</td>
+                    <td><span class="hh-chip"><span class="hh-dot hh-dot--red"></span>Visible</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="hh-section hh-section--yellow" id="use" aria-labelledby="use-title">
+        <div class="hh-container">
+          <div class="sg-section-head">
+            <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);">
+              <span class="hh-kicker">07 / Use</span>
+              <h2 class="hh-display" id="use-title">Drop it in, then make it yours.</h2>
+            </div>
+          </div>
+
+          <div class="sg-copy-grid">
+            <div class="hh-stack">
+              <p class="hh-lede">
+                Add the CSS file, compose with <code class="hh-code">hh-</code> classes, and override tokens when a project needs a different rhythm.
+              </p>
+              <a class="hh-button hh-button--primary hh-button--large hh-w-fit" href="./hammhaus.css" download="hammhaus.css">
+                <svg class="sg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3v12"></path>
+                  <path d="m7 10 5 5 5-5"></path>
+                  <path d="M5 21h14"></path>
+                </svg>
+                Download Hammhaus.css
+              </a>
+            </div>
+
+            <div class="hh-stack">
+              <pre class="hh-code-block"><code>&lt;link rel="stylesheet" href="hammhaus.css"&gt;
+
+&lt;section class="hh-section hh-section--paper"&gt;
+  &lt;div class="hh-container hh-stack"&gt;
+    &lt;span class="hh-kicker"&gt;New project&lt;/span&gt;
+    &lt;h1 class="hh-display"&gt;Hamm follows form.&lt;/h1&gt;
+    &lt;p class="hh-lede"&gt;Build with paper, ink, and guts.&lt;/p&gt;
+    &lt;a class="hh-button hh-button--primary" href="#"&gt;Start&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+              <pre class="hh-code-block"><code>:root {
+  --hh-accent: var(--hh-blue);
+  --hh-container: 1280px;
+}
+
+.launch-section {
+  --hh-bg: var(--hh-ink);
+  --hh-fg: var(--hh-paper);
+  --hh-accent: var(--hh-yellow);
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="sg-footer">
+      <div class="hh-container hh-stack">
+        <div class="hh-cluster hh-justify-between">
+          <div>
+            <p class="sg-footer__mark">Hammhaus</p>
+            <p class="hh-mono hh-muted">Hamm follows form</p>
+          </div>
+          <a class="hh-button hh-button--yellow" href="./hammhaus.css" download="hammhaus.css">
+            <svg class="sg-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v12"></path>
+              <path d="m7 10 5 5 5-5"></path>
+              <path d="M5 21h14"></path>
+            </svg>
+            Download CSS
+          </a>
+        </div>
+        <span class="hh-rule"></span>
+        <p class="hh-muted">Hammhaus CSS. Copyright 2026 Geoffrey Hamm. All rights reserved.</p>
+      </div>
+    </footer>
+    <script>
+      (() => {
+        const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+        const cursor = document.querySelector(".hh-cursor");
+
+        if (!finePointer || !cursor) return;
+
+        document.body.classList.add("hh-cursor-enabled");
+
+        window.addEventListener("pointermove", (event) => {
+          cursor.style.setProperty("--hh-cursor-x", `${event.clientX}px`);
+          cursor.style.setProperty("--hh-cursor-y", `${event.clientY}px`);
+          const target = document.elementFromPoint(event.clientX, event.clientY);
+          cursor.classList.toggle(
+            "is-hover",
+            Boolean(target?.closest("a, button, input, textarea, select, summary, [role='button']"))
+          );
+        });
+
+        document.addEventListener("pointerover", (event) => {
+          if (event.target.closest("a, button, input, textarea, select, summary, [role='button']")) {
+            cursor.classList.add("is-hover");
+          }
+        });
+
+        document.addEventListener("pointerout", (event) => {
+          if (event.target.closest("a, button, input, textarea, select, summary, [role='button']")) {
+            cursor.classList.remove("is-hover");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
