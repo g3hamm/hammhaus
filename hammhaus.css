@@ -1,14 +1,26 @@
 /*!
- * Hammhaus v1.0.0
+ * Hammhaus v1.1.0
  * Motto: "Hamm follows form"
- * Copyright (c) 2026 Geoffrey Hamm. All rights reserved.
+ * Copyright (c) 2026 Geoffrey Hamm.
+ * Released under the MIT License. Use it, ship it, remix it.
  *
  * Hammhaus is a portable CSS system adapted from Geoffrey Hamm's
  * editorial portfolio stylesheet. It keeps the paper, ink, and Bauhaus
  * accent language while removing project-specific scene behavior.
+ *
+ * Fonts: this system expects Archivo + JetBrains Mono. To keep the
+ * stylesheet portable and render-blocking-free, the font @import has been
+ * removed. Add the following to your <head> (already done in this repo's
+ * index.html), or rely on the system-ui fallbacks baked into the tokens:
+ *
+ *   <link rel="preconnect" href="https://fonts.googleapis.com">
+ *   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ *   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&display=swap">
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&display=swap");
+/* ==========================================================================
+   Tokens
+   ========================================================================== */
 
 :root {
   color-scheme: light;
@@ -34,6 +46,7 @@
   --hh-accent: var(--hh-red);
   --hh-accent-2: var(--hh-blue);
   --hh-accent-3: var(--hh-yellow);
+  --hh-focus: var(--hh-yellow);
 
   --hh-font-display: "Archivo", "Archivo Black", system-ui, sans-serif;
   --hh-font-body: "Archivo", system-ui, -apple-system, sans-serif;
@@ -48,8 +61,11 @@
   --hh-type-small: 0.875rem;
   --hh-type-micro: 0.75rem;
 
+  --hh-leading-hero: 0.85;
   --hh-leading-tight: 0.95;
   --hh-leading-title: 1.05;
+  --hh-leading-snug: 1.35;
+  --hh-leading-lede: 1.65;
   --hh-leading-body: 1.62;
 
   --hh-space-1: 0.25rem;
@@ -92,6 +108,10 @@
   }
 }
 
+/* ==========================================================================
+   Base & reset
+   ========================================================================== */
+
 *,
 *::before,
 *::after {
@@ -107,6 +127,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   font-family: var(--hh-font-body);
   font-size: var(--hh-type-body);
   line-height: var(--hh-leading-body);
@@ -171,9 +192,13 @@ a:hover {
 }
 
 :focus-visible {
-  outline: 3px solid var(--hh-yellow);
+  outline: 3px solid var(--hh-focus);
   outline-offset: 3px;
 }
+
+/* ==========================================================================
+   Layout: containers, sections, primitives
+   ========================================================================== */
 
 .hh-container {
   width: min(100% - (var(--hh-gutter) * 2), var(--hh-container));
@@ -211,40 +236,28 @@ a:hover {
   color: var(--hh-fg);
 }
 
-.hh-section--ink {
-  --hh-bg: var(--hh-ink);
-  --hh-fg: var(--hh-paper);
-  --hh-accent: var(--hh-yellow);
-  --hh-line: color-mix(in srgb, var(--hh-paper) 18%, transparent);
-  --hh-line-strong: color-mix(in srgb, var(--hh-paper) 35%, transparent);
-  background: var(--hh-bg);
-  color: var(--hh-fg);
-}
-
-.hh-section--blue {
-  --hh-bg: var(--hh-blue);
-  --hh-fg: var(--hh-paper);
-  --hh-accent: var(--hh-yellow);
-  --hh-line: color-mix(in srgb, var(--hh-paper) 18%, transparent);
-  --hh-line-strong: color-mix(in srgb, var(--hh-paper) 35%, transparent);
-  background: var(--hh-bg);
-  color: var(--hh-fg);
-}
-
+/* Dark surfaces share the same paper-tinted hairlines and a yellow focus ring. */
+.hh-section--ink,
+.hh-section--blue,
 .hh-section--red {
-  --hh-bg: var(--hh-red);
   --hh-fg: var(--hh-paper);
   --hh-accent: var(--hh-yellow);
+  --hh-focus: var(--hh-yellow);
   --hh-line: color-mix(in srgb, var(--hh-paper) 18%, transparent);
   --hh-line-strong: color-mix(in srgb, var(--hh-paper) 35%, transparent);
   background: var(--hh-bg);
   color: var(--hh-fg);
 }
+
+.hh-section--ink { --hh-bg: var(--hh-ink); }
+.hh-section--blue { --hh-bg: var(--hh-blue); }
+.hh-section--red { --hh-bg: var(--hh-red); }
 
 .hh-section--yellow {
   --hh-bg: var(--hh-yellow);
   --hh-fg: var(--hh-ink);
   --hh-accent: var(--hh-red);
+  --hh-focus: var(--hh-ink); /* yellow-on-yellow would be invisible */
   background: var(--hh-bg);
   color: var(--hh-fg);
 }
@@ -281,13 +294,16 @@ a:hover {
   }
 }
 
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
 .hh-kicker,
 .hh-label,
 .hh-mono {
   font-family: var(--hh-font-mono);
   font-size: var(--hh-type-micro);
   line-height: 1.4;
-  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -295,7 +311,7 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: var(--hh-space-2);
-  color: color-mix(in srgb, currentColor 70%, transparent);
+  color: color-mix(in srgb, currentColor 70%, var(--hh-bg));
   font-weight: 700;
 }
 
@@ -310,46 +326,41 @@ a:hover {
 .hh-label {
   display: block;
   margin-block-end: var(--hh-space-2);
-  color: color-mix(in srgb, currentColor 66%, transparent);
+  color: color-mix(in srgb, currentColor 66%, var(--hh-bg));
   font-weight: 700;
 }
 
-.hh-display {
+/* Shared display-type face. Each rule below sets only its own size/leading. */
+.hh-display,
+.hh-title,
+.hh-section-title,
+.hh-brand,
+.hh-hero__title {
   font-family: var(--hh-font-display);
-  font-size: var(--hh-type-display);
-  line-height: var(--hh-leading-tight);
-  letter-spacing: 0;
   font-weight: 900;
   font-kerning: normal;
   font-feature-settings: "kern" 1;
   text-wrap: balance;
+}
+
+.hh-display {
+  font-size: var(--hh-type-display);
+  line-height: var(--hh-leading-tight);
 }
 
 .hh-title {
-  font-family: var(--hh-font-display);
   font-size: var(--hh-type-title);
   line-height: var(--hh-leading-title);
-  letter-spacing: 0;
-  font-weight: 900;
-  font-kerning: normal;
-  font-feature-settings: "kern" 1;
-  text-wrap: balance;
 }
 
 .hh-section-title {
-  font-family: var(--hh-font-display);
   font-size: var(--hh-type-section);
   line-height: var(--hh-leading-title);
-  letter-spacing: 0;
-  font-weight: 900;
-  font-kerning: normal;
-  font-feature-settings: "kern" 1;
-  text-wrap: balance;
 }
 
 .hh-subhead {
   font-size: var(--hh-type-subhead);
-  line-height: 1.35;
+  line-height: var(--hh-leading-snug);
   font-weight: 800;
   text-wrap: balance;
 }
@@ -357,8 +368,8 @@ a:hover {
 .hh-lede {
   max-width: 62ch;
   font-size: 1.15rem;
-  line-height: 1.65;
-  color: color-mix(in srgb, currentColor 78%, transparent);
+  line-height: var(--hh-leading-lede);
+  color: color-mix(in srgb, currentColor 78%, var(--hh-bg));
 }
 
 .hh-prose {
@@ -415,8 +426,12 @@ a:hover {
 }
 
 .hh-muted {
-  color: color-mix(in srgb, currentColor 62%, transparent);
+  color: color-mix(in srgb, currentColor 62%, var(--hh-bg));
 }
+
+/* ==========================================================================
+   Navigation & brand
+   ========================================================================== */
 
 .hh-nav {
   position: sticky;
@@ -441,13 +456,8 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: var(--hh-space-3);
-  font-family: var(--hh-font-display);
   font-size: 1.05rem;
   line-height: 1;
-  letter-spacing: 0;
-  font-weight: 900;
-  font-kerning: normal;
-  font-feature-settings: "kern" 1;
   text-decoration: none;
 }
 
@@ -505,12 +515,16 @@ a:hover {
 
 .hh-nav__links a {
   text-decoration: none;
-  color: color-mix(in srgb, currentColor 78%, transparent);
+  color: color-mix(in srgb, currentColor 78%, var(--hh-bg));
 }
 
 .hh-nav__links a:hover {
   color: currentColor;
 }
+
+/* ==========================================================================
+   Custom cursor (opt-in via body.hh-cursor-enabled)
+   ========================================================================== */
 
 @media (hover: hover) and (pointer: fine) {
   body.hh-cursor-enabled,
@@ -603,9 +617,14 @@ a:hover {
   }
 }
 
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
 .hh-hero {
   position: relative;
   min-height: 92vh;
+  min-height: 92dvh;
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -649,14 +668,8 @@ a:hover {
 
 .hh-hero__title {
   max-width: 10ch;
-  font-family: var(--hh-font-display);
   font-size: var(--hh-type-hero);
-  line-height: 0.85;
-  letter-spacing: 0;
-  font-weight: 900;
-  font-kerning: normal;
-  font-feature-settings: "kern" 1;
-  text-wrap: balance;
+  line-height: var(--hh-leading-hero);
 }
 
 .hh-hero__motto {
@@ -698,6 +711,10 @@ a:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
 
 .hh-button {
   --hh-button-bg: transparent;
@@ -811,6 +828,10 @@ a:hover {
   transform: translateY(-2px);
 }
 
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
 .hh-card {
   position: relative;
   display: flex;
@@ -854,6 +875,10 @@ a:hover {
     linear-gradient(45deg, var(--hh-yellow) 0 26%, transparent 26%),
     var(--hh-blue);
 }
+
+/* ==========================================================================
+   Badges, chips & dots
+   ========================================================================== */
 
 .hh-badge,
 .hh-chip {
@@ -906,6 +931,10 @@ a:hover {
 .hh-dot--green { background: var(--hh-green); }
 .hh-dot--plum { background: var(--hh-plum); }
 
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
 .hh-form {
   display: grid;
   gap: var(--hh-space-5);
@@ -946,7 +975,7 @@ a:hover {
 
 .hh-input::placeholder,
 .hh-textarea::placeholder {
-  color: color-mix(in srgb, currentColor 44%, transparent);
+  color: color-mix(in srgb, currentColor 44%, var(--hh-bg));
 }
 
 .hh-select {
@@ -969,7 +998,7 @@ a:hover {
 
 .hh-help {
   font-size: var(--hh-type-small);
-  color: color-mix(in srgb, currentColor 62%, transparent);
+  color: color-mix(in srgb, currentColor 62%, var(--hh-bg));
 }
 
 .hh-field--error .hh-input,
@@ -1048,6 +1077,10 @@ a:hover {
   transform: translateX(1.5rem);
 }
 
+/* ==========================================================================
+   Feedback: alerts, stats, progress
+   ========================================================================== */
+
 .hh-alert {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -1089,8 +1122,12 @@ a:hover {
 
 .hh-stat__label {
   font-size: var(--hh-type-small);
-  color: color-mix(in srgb, currentColor 64%, transparent);
+  color: color-mix(in srgb, currentColor 64%, var(--hh-bg));
 }
+
+/* ==========================================================================
+   Navigation widgets: tabs, segmented, toolbar
+   ========================================================================== */
 
 .hh-tabs,
 .hh-segmented {
@@ -1146,6 +1183,10 @@ a:hover {
   background: var(--hh-accent);
 }
 
+/* ==========================================================================
+   Data display: tables, timeline, accordion
+   ========================================================================== */
+
 .hh-table-wrap {
   max-width: 100%;
   overflow-x: auto;
@@ -1171,7 +1212,7 @@ a:hover {
   font-family: var(--hh-font-mono);
   font-size: var(--hh-type-micro);
   text-transform: uppercase;
-  color: color-mix(in srgb, currentColor 62%, transparent);
+  color: color-mix(in srgb, currentColor 62%, var(--hh-bg));
   background: color-mix(in srgb, currentColor 6%, transparent);
 }
 
@@ -1202,7 +1243,7 @@ a:hover {
 .hh-timeline__time {
   font-family: var(--hh-font-mono);
   font-size: var(--hh-type-small);
-  color: color-mix(in srgb, currentColor 62%, transparent);
+  color: color-mix(in srgb, currentColor 62%, var(--hh-bg));
 }
 
 @media (max-width: 640px) {
@@ -1253,7 +1294,7 @@ a:hover {
 
 .hh-accordion__body {
   padding-block-end: var(--hh-space-5);
-  color: color-mix(in srgb, currentColor 72%, transparent);
+  color: color-mix(in srgb, currentColor 72%, var(--hh-bg));
 }
 
 .hh-toolbar {
@@ -1266,6 +1307,10 @@ a:hover {
   border-radius: var(--hh-radius-pill);
   background: color-mix(in srgb, currentColor 7%, transparent);
 }
+
+/* ==========================================================================
+   Decorative: shapes, swatches, marquee
+   ========================================================================== */
 
 .hh-shape {
   display: inline-block;
@@ -1342,6 +1387,10 @@ a:hover {
     transform: translateX(-50%);
   }
 }
+
+/* ==========================================================================
+   Motion preferences & utilities
+   ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   *,

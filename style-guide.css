@@ -1,3 +1,11 @@
+/*!
+ * Hammhaus Style Guide — page-specific styles
+ *
+ * Everything here is scoped to the .sg-* namespace and exists only to stage
+ * the demo page (hero, showcase, set-pieces). It depends on hammhaus.css for
+ * tokens and components; nothing in this file belongs in the portable system.
+ */
+
 .sg-page {
   position: relative;
   background:
@@ -83,7 +91,6 @@
   font-family: var(--hh-font-display);
   font-size: 5.1rem;
   line-height: 0.82;
-  letter-spacing: 0;
   font-weight: 900;
   font-kerning: normal;
   font-feature-settings: "kern" 1;
