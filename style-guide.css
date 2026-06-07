@@ -91,6 +91,7 @@
   font-family: var(--hh-font-display);
   font-size: 5.1rem;
   line-height: 0.82;
+  letter-spacing: var(--hh-tracking-hero);
   font-weight: 900;
   font-kerning: normal;
   font-feature-settings: "kern" 1;
@@ -113,6 +114,7 @@
   font-size: 10.8rem;
   font-weight: 900;
   line-height: 0.78;
+  letter-spacing: var(--hh-tracking-hero);
   color: color-mix(in srgb, var(--hh-ink) 7%, transparent);
   text-transform: uppercase;
   pointer-events: none;
@@ -513,6 +515,7 @@
   font-size: 4.5rem;
   font-weight: 900;
   line-height: 0.82;
+  letter-spacing: var(--hh-tracking-display);
   text-transform: uppercase;
 }
 
@@ -625,6 +628,7 @@
   font-size: var(--hh-type-display);
   font-weight: 900;
   line-height: 0.9;
+  letter-spacing: var(--hh-tracking-display);
   text-transform: none;
 }
 

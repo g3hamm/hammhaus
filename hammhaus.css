@@ -68,6 +68,15 @@
   --hh-leading-lede: 1.65;
   --hh-leading-body: 1.62;
 
+  /* Display tracking. Heavy Archivo spaces loose at large sizes, so display
+     type is pulled in with negative letter-spacing; bigger tier, tighter set.
+     Body/mono stay at the font's natural spacing. */
+  --hh-tracking-hero: -0.045em;
+  --hh-tracking-display: -0.035em;
+  --hh-tracking-title: -0.025em;
+  --hh-tracking-section: -0.02em;
+  --hh-tracking-subhead: -0.015em;
+
   --hh-space-1: 0.25rem;
   --hh-space-2: 0.5rem;
   --hh-space-3: 0.75rem;
@@ -346,21 +355,25 @@ a:hover {
 .hh-display {
   font-size: var(--hh-type-display);
   line-height: var(--hh-leading-tight);
+  letter-spacing: var(--hh-tracking-display);
 }
 
 .hh-title {
   font-size: var(--hh-type-title);
   line-height: var(--hh-leading-title);
+  letter-spacing: var(--hh-tracking-title);
 }
 
 .hh-section-title {
   font-size: var(--hh-type-section);
   line-height: var(--hh-leading-title);
+  letter-spacing: var(--hh-tracking-section);
 }
 
 .hh-subhead {
   font-size: var(--hh-type-subhead);
   line-height: var(--hh-leading-snug);
+  letter-spacing: var(--hh-tracking-subhead);
   font-weight: 800;
   text-wrap: balance;
 }
@@ -670,6 +683,7 @@ a:hover {
   max-width: 10ch;
   font-size: var(--hh-type-hero);
   line-height: var(--hh-leading-hero);
+  letter-spacing: var(--hh-tracking-hero);
 }
 
 .hh-hero__motto {
