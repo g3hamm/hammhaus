@@ -555,10 +555,19 @@ a:hover {
   z-index: 10000;
   width: 0;
   height: 0;
-  color: var(--hh-ink);
+  /* White + difference blend = the cursor inverts against whatever is
+     behind it, so it stays visible on ink, paper, red, yellow — any
+     surface. No JS needed for the color; only position is scripted. */
+  color: var(--hh-white);
+  mix-blend-mode: difference;
   pointer-events: none;
   transform: translate3d(var(--hh-cursor-x), var(--hh-cursor-y), 0);
   transition: opacity 160ms var(--hh-ease);
+}
+
+/* If a browser can't blend, fall back to a solid ink cursor. */
+@supports not (mix-blend-mode: difference) {
+  .hh-cursor { color: var(--hh-ink); mix-blend-mode: normal; }
 }
 
 .hh-cursor__dot,
