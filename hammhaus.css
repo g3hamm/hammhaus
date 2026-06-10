@@ -90,6 +90,7 @@
   --hh-container: 1180px;
   --hh-container-wide: 1480px;
   --hh-gutter: 1.5rem;
+  --hh-scroll-padding: 5.5rem;
   --hh-radius: 8px;
   --hh-radius-sm: 4px;
   --hh-radius-pill: 999px;
@@ -129,6 +130,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Keep in-page anchor targets clear of a sticky header. */
+  scroll-padding-top: var(--hh-scroll-padding);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -1779,3 +1782,50 @@ a:hover {
 .hh-mb-0 { margin-bottom: 0; }
 .hh-p-0 { padding: 0; }
 .hh-hidden { display: none !important; }
+
+/* ==========================================================================
+   Print: ink on white, drop the theater
+   ========================================================================== */
+
+@media print {
+  body {
+    background: #fff !important;
+    color: #000;
+  }
+
+  .hh-cursor,
+  .hh-marquee,
+  .hh-nav {
+    display: none !important;
+  }
+
+  .hh-section {
+    padding-block: var(--hh-space-4);
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .hh-card,
+  .hh-button,
+  .hh-table-wrap,
+  .hh-code-block {
+    box-shadow: none !important;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  /* Surface links so a printed page keeps its references. */
+  .hh-prose a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+
+  .hh-section,
+  .hh-card,
+  .hh-table {
+    break-inside: avoid;
+  }
+}
