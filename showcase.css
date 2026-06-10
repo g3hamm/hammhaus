@@ -391,6 +391,23 @@
   top: 6rem;
 }
 
+/* Bauhaus seal: quartered circle, the control panel's maker's mark. */
+.sx-lab__seal {
+  inline-size: 2.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid var(--hh-ink);
+  background: conic-gradient(var(--hh-red) 0 25%, var(--hh-blue) 0 50%, var(--hh-yellow) 0 75%, var(--hh-paper-3) 0);
+}
+
+.sx-lab__controls .hh-code-block {
+  font-size: 0.72rem;
+  line-height: 1.55;
+  padding: var(--hh-space-4);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 .sx-control { display: grid; gap: var(--hh-space-3); }
 
 .sx-choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
@@ -426,8 +443,6 @@
 
 .sx-choice--surface::before { display: none; }
 
-.sx-range { width: 100%; accent-color: var(--hh-accent); }
-
 .sx-range-out {
   font-family: var(--hh-font-mono);
   font-size: var(--hh-type-small);
@@ -462,6 +477,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
   gap: var(--hh-space-4);
+}
+
+/* First preview card wears the hard shadow so the shadow slider reads.
+   Keep the accent top border — it's the card's signature. */
+.sx-preview__cards .hh-card:first-child {
+  border: 2px solid var(--hh-ink);
+  border-top: 4px solid var(--hh-accent);
+  box-shadow: var(--hh-shadow-hard);
 }
 
 @media (max-width: 880px) {

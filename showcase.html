@@ -84,7 +84,7 @@
             </div>
             <dl class="sx-hero__stats" aria-label="At a glance">
               <div><dt>0</dt><dd>Runtime deps</dd></div>
-              <div><dt>30+</dt><dd>Components</dd></div>
+              <div><dt>40+</dt><dd>Components</dd></div>
               <div><dt>100%</dt><dd>Pure CSS</dd></div>
             </dl>
           </div>
@@ -250,13 +250,17 @@
 
           <div class="sx-lab sx-reveal">
             <form class="sx-lab__controls" aria-label="Theme controls">
+              <div class="hh-cluster hh-justify-between">
+                <span class="sx-lab__seal" aria-hidden="true"></span>
+                <span class="hh-mono hh-muted">theme-press v1.2</span>
+              </div>
               <div class="sx-control">
                 <span class="hh-label hh-mb-0">Accent</span>
                 <div class="sx-choices" id="ctl-accent">
-                  <button class="sx-choice" type="button" data-accent="var(--hh-red)" style="--sx-choice: var(--hh-red)" aria-pressed="true">Red</button>
-                  <button class="sx-choice" type="button" data-accent="var(--hh-blue)" style="--sx-choice: var(--hh-blue)" aria-pressed="false">Blue</button>
-                  <button class="sx-choice" type="button" data-accent="var(--hh-green)" style="--sx-choice: var(--hh-green)" aria-pressed="false">Green</button>
-                  <button class="sx-choice" type="button" data-accent="var(--hh-plum)" style="--sx-choice: var(--hh-plum)" aria-pressed="false">Plum</button>
+                  <button class="sx-choice" type="button" data-accent="--hh-red" style="--sx-choice: var(--hh-red)" aria-pressed="true">Red</button>
+                  <button class="sx-choice" type="button" data-accent="--hh-blue" style="--sx-choice: var(--hh-blue)" aria-pressed="false">Blue</button>
+                  <button class="sx-choice" type="button" data-accent="--hh-green" style="--sx-choice: var(--hh-green)" aria-pressed="false">Green</button>
+                  <button class="sx-choice" type="button" data-accent="--hh-plum" style="--sx-choice: var(--hh-plum)" aria-pressed="false">Plum</button>
                 </div>
               </div>
               <div class="sx-control">
@@ -272,14 +276,29 @@
                 <label class="hh-label hh-mb-0" for="ctl-tracking">Headline tracking
                   <span class="sx-range-out" id="out-tracking">-0.035em</span>
                 </label>
-                <input class="sx-range" id="ctl-tracking" type="range" min="-0.08" max="0.02" step="0.005" value="-0.035">
+                <input class="hh-range" id="ctl-tracking" type="range" min="-0.08" max="0.02" step="0.005" value="-0.035">
                 <span class="hh-help">The same lever we tuned for Archivo — live.</span>
               </div>
               <div class="sx-control">
                 <label class="hh-label hh-mb-0" for="ctl-radius">Corner radius
                   <span class="sx-range-out" id="out-radius">8px</span>
                 </label>
-                <input class="sx-range" id="ctl-radius" type="range" min="0" max="22" step="1" value="8">
+                <input class="hh-range" id="ctl-radius" type="range" min="0" max="22" step="1" value="8">
+              </div>
+              <div class="sx-control">
+                <label class="hh-label hh-mb-0" for="ctl-shadow">Poster shadow
+                  <span class="sx-range-out" id="out-shadow">8px</span>
+                </label>
+                <input class="hh-range" id="ctl-shadow" type="range" min="0" max="16" step="1" value="8">
+              </div>
+              <div class="hh-cluster">
+                <button class="hh-button hh-button--yellow hh-button--small" type="button" id="ctl-shuffle">Shuffle ⚂</button>
+                <button class="hh-button hh-button--ghost hh-button--small" type="button" id="ctl-reset">Reset</button>
+              </div>
+              <div class="sx-control sx-codeblock">
+                <span class="hh-label hh-mb-0">Your theme — copy &amp; ship</span>
+                <pre class="hh-code-block"><code id="sx-theme-code"></code></pre>
+                <button class="sx-copy-btn" type="button" data-copy-prev style="top: 2.4rem;">Copy</button>
               </div>
             </form>
 
@@ -307,6 +326,17 @@
                     <p class="hh-muted">Flips contrast while keeping the accent.</p>
                     <a class="hh-button hh-button--ghost hh-button--small hh-w-fit" href="#playground">Action</a>
                   </article>
+                </div>
+                <div class="hh-cluster hh-justify-between">
+                  <div class="hh-cluster">
+                    <ul class="hh-avatar-group" aria-label="Crew">
+                      <li class="hh-avatar" style="--hh-avatar-bg: var(--hh-red);">GH</li>
+                      <li class="hh-avatar" style="--hh-avatar-bg: var(--hh-blue);">AB</li>
+                      <li class="hh-avatar" style="--hh-avatar-bg: var(--hh-yellow); --hh-avatar-fg: var(--hh-ink);">CW</li>
+                    </ul>
+                    <span class="hh-spinner" style="--hh-spinner-size: 2rem;" role="status" aria-label="Loading"></span>
+                  </div>
+                  <span class="hh-mono">tokens in, theme out</span>
                 </div>
                 <div class="hh-alert hh-alert--info">
                   <span class="hh-dot hh-dot--blue" aria-hidden="true"></span>
@@ -380,7 +410,7 @@
             <span class="sx-head__index">05 / Components</span>
             <div class="sx-head__body">
               <h2 class="hh-display" id="components-title">Everything you need to ship a page.</h2>
-              <p class="hh-lede sx-head__lead">Thirty-plus components, every one a plain HTML element with an <code class="hh-code">hh-</code> class.</p>
+              <p class="hh-lede sx-head__lead">Forty-plus components, every one a plain HTML element with an <code class="hh-code">hh-</code> class.</p>
             </div>
           </div>
 
@@ -446,6 +476,10 @@
                 <label class="hh-radio"><input name="tone" type="radio" checked> <span>Editorial</span></label>
                 <label class="hh-radio"><input name="tone" type="radio"> <span>Product</span></label>
                 <label class="hh-switch"><input type="checkbox" checked><span class="hh-switch__track" aria-hidden="true"></span><span>High contrast</span></label>
+                <label class="hh-field">
+                  <span class="hh-label">Intensity</span>
+                  <input class="hh-range" type="range" min="0" max="100" value="62">
+                </label>
               </form>
             </article>
 
@@ -510,7 +544,7 @@
                   <div class="hh-progress__track"><span class="hh-progress__bar" style="--hh-progress: 82%;"></span></div>
                 </div>
                 <div class="hh-stat-grid">
-                  <div class="hh-stat"><span class="hh-stat__value">30+</span><span class="hh-stat__label">Components</span></div>
+                  <div class="hh-stat"><span class="hh-stat__value">40+</span><span class="hh-stat__label">Components</span></div>
                   <div class="hh-stat"><span class="hh-stat__value">7</span><span class="hh-stat__label">Core colors</span></div>
                 </div>
               </div>
@@ -551,6 +585,76 @@
                 <li class="hh-timeline__item"><time class="hh-timeline__time">Step 02</time><div><strong>Compose</strong><p class="hh-muted">Use sections, grids, and components.</p></div></li>
                 <li class="hh-timeline__item"><time class="hh-timeline__time">Step 03</time><div><strong>Theme</strong><p class="hh-muted">Override tokens to taste.</p></div></li>
               </ol>
+            </article>
+
+            <!-- Wayfinding -->
+            <article class="sx-spec">
+              <div class="sx-spec__head"><h3 class="hh-subhead">Wayfinding</h3><span class="hh-mono hh-muted">new in 1.2</span></div>
+              <div class="sx-spec__demo">
+                <nav aria-label="Breadcrumb">
+                  <ol class="hh-breadcrumbs">
+                    <li><a href="#top">Studio</a></li>
+                    <li><a href="#components">Systems</a></li>
+                    <li aria-current="page">Hammhaus</li>
+                  </ol>
+                </nav>
+                <nav aria-label="Pagination">
+                  <ul class="hh-pagination">
+                    <li><a class="hh-page" href="#components" aria-label="Previous">←</a></li>
+                    <li><a class="hh-page" href="#components" aria-current="page">1</a></li>
+                    <li><a class="hh-page" href="#components">2</a></li>
+                    <li><a class="hh-page" href="#components">3</a></li>
+                    <li><a class="hh-page" href="#components" aria-label="Next">→</a></li>
+                  </ul>
+                </nav>
+                <div class="hh-divider">Divider with a label</div>
+                <p class="hh-mb-0">Press <kbd class="hh-kbd">⌘</kbd> <kbd class="hh-kbd">K</kbd> to search.</p>
+              </div>
+            </article>
+
+            <!-- People & waiting -->
+            <article class="sx-spec">
+              <div class="sx-spec__head"><h3 class="hh-subhead">People &amp; waiting</h3><span class="hh-mono hh-muted">new in 1.2</span></div>
+              <div class="sx-spec__demo">
+                <div class="hh-cluster">
+                  <ul class="hh-avatar-group" aria-label="Team">
+                    <li class="hh-avatar" style="--hh-avatar-bg: var(--hh-red);">GH</li>
+                    <li class="hh-avatar" style="--hh-avatar-bg: var(--hh-blue);">AB</li>
+                    <li class="hh-avatar" style="--hh-avatar-bg: var(--hh-yellow); --hh-avatar-fg: var(--hh-ink);">CW</li>
+                    <li class="hh-avatar" style="--hh-avatar-bg: var(--hh-green);">+4</li>
+                  </ul>
+                  <span class="hh-avatar hh-avatar--square" style="--hh-avatar-bg: var(--hh-plum);">HQ</span>
+                </div>
+                <div class="hh-cluster">
+                  <span class="hh-spinner" role="status" aria-label="Loading"></span>
+                  <span class="hh-mono hh-muted">Bauhaus spinner — conic, quartered</span>
+                </div>
+                <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);" aria-hidden="true">
+                  <span class="hh-skeleton" style="max-width: 70%;"></span>
+                  <span class="hh-skeleton"></span>
+                  <span class="hh-skeleton" style="max-width: 45%;"></span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Voice -->
+            <article class="sx-spec">
+              <div class="sx-spec__head"><h3 class="hh-subhead">Voice</h3><span class="hh-mono hh-muted">new in 1.2</span></div>
+              <div class="sx-spec__demo">
+                <blockquote class="hh-quote">
+                  Constraints are the kindest thing a system can give a team.
+                  <footer>— the Hammhaus manifesto</footer>
+                </blockquote>
+                <ul class="hh-list">
+                  <li>Square bullets, accent-colored</li>
+                  <li>Wraps cleanly across multiple lines without losing alignment</li>
+                  <li>Zero markup beyond a class</li>
+                </ul>
+                <div class="hh-cluster">
+                  <button class="hh-button hh-button--small" type="button" data-hh-tip="Tooltips are pure CSS — data-hh-tip">Hover me</button>
+                  <button class="hh-button hh-button--primary hh-button--small" type="button" data-dialog-open="sx-dialog">Open dialog</button>
+                </div>
+              </div>
             </article>
 
             <!-- Table (wide) -->
@@ -791,6 +895,18 @@
       </div>
     </footer>
 
+    <dialog class="hh-dialog" id="sx-dialog">
+      <form method="dialog" class="hh-stack" style="--hh-stack-gap: var(--hh-space-4);">
+        <span class="hh-kicker">Native dialog</span>
+        <h3 class="hh-title">Styled by one class.</h3>
+        <p class="hh-muted"><code class="hh-code">.hh-dialog</code> dresses the platform <code class="hh-code">&lt;dialog&gt;</code> element — hard shadow, blurred backdrop, zero JavaScript beyond <code class="hh-code">showModal()</code>.</p>
+        <div class="hh-cluster">
+          <button class="hh-button hh-button--primary" value="ok">Beautiful</button>
+          <button class="hh-button hh-button--ghost" value="cancel">Close</button>
+        </div>
+      </form>
+    </dialog>
+
     <div class="sx-toast" role="status" aria-live="polite" id="sx-toast"></div>
 
     <script>
@@ -870,38 +986,77 @@
         const preview = document.getElementById("sx-preview");
         if (preview) {
           const surfaces = ["hh-section--paper", "hh-section--white", "hh-section--ink", "hh-section--blue", "hh-section--yellow"];
-          const press = (group, btn) => {
-            group.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b === btn ? "true" : "false"));
+          const defaults = { accent: "--hh-red", surface: "hh-section--paper", tracking: -0.035, radius: 8, shadow: 8 };
+          const state = { ...defaults };
+          const $ = (id) => document.getElementById(id);
+          const ctl = {
+            accent: $("ctl-accent"), surface: $("ctl-surface"),
+            tracking: $("ctl-tracking"), radius: $("ctl-radius"), shadow: $("ctl-shadow"),
+            shuffle: $("ctl-shuffle"), reset: $("ctl-reset"),
+            outT: $("out-tracking"), outR: $("out-radius"), outS: $("out-shadow"),
+            code: $("sx-theme-code"),
           };
-          const accentCtl = document.getElementById("ctl-accent");
-          accentCtl?.addEventListener("click", (e) => {
-            const btn = e.target.closest("button"); if (!btn) return;
-            preview.style.setProperty("--hh-accent", btn.dataset.accent);
-            press(accentCtl, btn);
-          });
-          const surfaceCtl = document.getElementById("ctl-surface");
-          surfaceCtl?.addEventListener("click", (e) => {
-            const btn = e.target.closest("button"); if (!btn) return;
+
+          const render = () => {
+            const trackingVal = state.tracking.toFixed(3) + "em";
+            const shadowVal = `${state.shadow}px ${Math.round(state.shadow * 1.25)}px 0 var(--hh-ink)`;
+            preview.style.setProperty("--hh-accent", `var(${state.accent})`);
+            preview.style.setProperty("--hh-tracking-display", trackingVal);
+            preview.style.setProperty("--hh-radius", state.radius + "px");
+            preview.style.setProperty("--hh-radius-sm", Math.round(state.radius / 2) + "px");
+            preview.style.setProperty("--hh-shadow-hard", shadowVal);
             surfaces.forEach((s) => preview.classList.remove(s));
-            preview.classList.add(btn.dataset.surface);
-            press(surfaceCtl, btn);
+            preview.classList.add(state.surface);
+
+            ctl.accent?.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.accent === state.accent)));
+            ctl.surface?.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.surface === state.surface)));
+            if (ctl.tracking) ctl.tracking.value = state.tracking;
+            if (ctl.radius) ctl.radius.value = state.radius;
+            if (ctl.shadow) ctl.shadow.value = state.shadow;
+            if (ctl.outT) ctl.outT.textContent = trackingVal;
+            if (ctl.outR) ctl.outR.textContent = state.radius + "px";
+            if (ctl.outS) ctl.outS.textContent = state.shadow + "px";
+            if (ctl.code) ctl.code.textContent =
+`.your-theme {
+  --hh-accent: var(${state.accent});
+  --hh-radius: ${state.radius}px;
+  --hh-tracking-display: ${trackingVal};
+  --hh-shadow-hard: ${shadowVal};
+}
+/* surface: class="hh-section ${state.surface}" */`;
+          };
+
+          ctl.accent?.addEventListener("click", (e) => {
+            const btn = e.target.closest("button"); if (!btn) return;
+            state.accent = btn.dataset.accent; render();
           });
-          const trackingCtl = document.getElementById("ctl-tracking");
-          const trackingOut = document.getElementById("out-tracking");
-          trackingCtl?.addEventListener("input", () => {
-            const v = (+trackingCtl.value).toFixed(3) + "em";
-            preview.style.setProperty("--hh-tracking-display", v);
-            if (trackingOut) trackingOut.textContent = v;
+          ctl.surface?.addEventListener("click", (e) => {
+            const btn = e.target.closest("button"); if (!btn) return;
+            state.surface = btn.dataset.surface; render();
           });
-          const radiusCtl = document.getElementById("ctl-radius");
-          const radiusOut = document.getElementById("out-radius");
-          radiusCtl?.addEventListener("input", () => {
-            const v = radiusCtl.value + "px";
-            preview.style.setProperty("--hh-radius", v);
-            preview.style.setProperty("--hh-radius-sm", Math.max(0, radiusCtl.value / 2) + "px");
-            if (radiusOut) radiusOut.textContent = v;
+          ctl.tracking?.addEventListener("input", () => { state.tracking = +ctl.tracking.value; render(); });
+          ctl.radius?.addEventListener("input", () => { state.radius = +ctl.radius.value; render(); });
+          ctl.shadow?.addEventListener("input", () => { state.shadow = +ctl.shadow.value; render(); });
+
+          ctl.shuffle?.addEventListener("click", () => {
+            const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+            state.accent = pick(["--hh-red", "--hh-blue", "--hh-green", "--hh-plum"]);
+            state.surface = pick(["hh-section--paper", "hh-section--white", "hh-section--ink", "hh-section--blue"]);
+            state.tracking = +((Math.random() * 0.1 - 0.08).toFixed(3));
+            state.radius = Math.floor(Math.random() * 23);
+            state.shadow = Math.floor(Math.random() * 17);
+            render();
+            showToast("Shuffled — copy the CSS if you love it");
           });
+          ctl.reset?.addEventListener("click", () => { Object.assign(state, defaults); render(); });
+
+          render();
         }
+
+        /* ---- Dialog demo ----------------------------------------------- */
+        document.querySelectorAll("[data-dialog-open]").forEach((btn) => {
+          btn.addEventListener("click", () => document.getElementById(btn.dataset.dialogOpen)?.showModal());
+        });
 
         /* ---- Scroll reveal -------------------------------------------- */
         const reveals = document.querySelectorAll(".sx-reveal");
