@@ -1,10 +1,13 @@
 /*!
- * Hammhaus Showcase — page theater for showcase.html
+ * Hammhaus Showcase — page-specific styles for index.html (the style guide)
  *
- * Everything here is scoped to the .sx-* namespace and exists only to stage
- * the showcase page. It depends on hammhaus.css for tokens and components;
- * nothing in this file belongs in the portable system. The star of the page
- * is hammhaus.css — these styles are the gallery walls, not the art.
+ * Why this file is separate from hammhaus.css: hammhaus.css is the portable
+ * product people download; this file is the gallery walls — hero set pieces,
+ * playground controls, watermark numerals — that exist only on this page.
+ * Keeping them apart means the downloadable system ships zero demo weight.
+ * Everything here is scoped to the .sx-* namespace and depends on
+ * hammhaus.css for tokens and components. The star is hammhaus.css —
+ * these styles are the gallery walls, not the art.
  */
 
 /* ==========================================================================
@@ -80,6 +83,27 @@
   height: 3px;
   background: var(--hh-accent);
   border-radius: var(--hh-radius-pill);
+}
+
+/* Theme toggle: show the sun when dark is active, the moon when light. */
+.sx-theme-toggle .sx-i-sun { display: none; }
+.sx-theme-toggle[data-mode="dark"] .sx-i-sun { display: block; }
+.sx-theme-toggle[data-mode="dark"] .sx-i-moon { display: none; }
+
+/* This page carries more nav links than the base system (plus a theme
+   toggle), so stack to a scrollable row earlier to avoid a crowded-row
+   overflow on tablets. */
+@media (max-width: 920px) {
+  .sx-page .hh-nav__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-block: var(--hh-space-4);
+  }
+  .sx-nav__links {
+    width: 100%;
+    overflow-x: auto;
+    padding-block-end: var(--hh-space-1);
+  }
 }
 
 /* ==========================================================================
@@ -295,10 +319,11 @@
    Marquee band
    ========================================================================== */
 
+/* Chrome bands stay dark in both themes (fixed brand anchors). */
 .sx-band {
-  border-block: 2px solid var(--hh-ink);
-  background: var(--hh-ink);
-  color: var(--hh-paper);
+  border-block: 2px solid var(--hh-black);
+  background: var(--hh-black);
+  color: var(--hh-cream);
 }
 
 .sx-band .hh-marquee { border-block: 0; }
@@ -391,6 +416,23 @@
   top: 6rem;
 }
 
+/* Bauhaus seal: quartered circle, the control panel's maker's mark. */
+.sx-lab__seal {
+  inline-size: 2.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid var(--hh-ink);
+  background: conic-gradient(var(--hh-red) 0 25%, var(--hh-blue) 0 50%, var(--hh-yellow) 0 75%, var(--hh-paper-3) 0);
+}
+
+.sx-lab__controls .hh-code-block {
+  font-size: 0.72rem;
+  line-height: 1.55;
+  padding: var(--hh-space-4);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 .sx-control { display: grid; gap: var(--hh-space-3); }
 
 .sx-choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
@@ -426,8 +468,6 @@
 
 .sx-choice--surface::before { display: none; }
 
-.sx-range { width: 100%; accent-color: var(--hh-accent); }
-
 .sx-range-out {
   font-family: var(--hh-font-mono);
   font-size: var(--hh-type-small);
@@ -462,6 +502,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
   gap: var(--hh-space-4);
+}
+
+/* First preview card wears the hard shadow so the shadow slider reads.
+   Keep the accent top border — it's the card's signature. */
+.sx-preview__cards .hh-card:first-child {
+  border: 2px solid var(--hh-ink);
+  border-top: 4px solid var(--hh-accent);
+  box-shadow: var(--hh-shadow-hard);
 }
 
 @media (max-width: 880px) {
@@ -709,13 +757,62 @@
 .sx-copy-btn.is-copied { background: var(--hh-yellow); color: var(--hh-ink); border-color: var(--hh-yellow); }
 
 /* ==========================================================================
+   Support (free, tip optional — calm and skippable)
+   ========================================================================== */
+
+.sx-support {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--hh-space-4);
+  max-width: 44rem;
+  margin-inline: auto;
+  padding: var(--hh-space-7) var(--hh-space-6);
+  text-align: center;
+  background: var(--hh-paper-3);
+  border: 2px solid var(--hh-ink);
+  border-radius: var(--hh-radius);
+  box-shadow: var(--hh-shadow-hard);
+}
+
+.sx-support__shapes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sx-support__shapes span {
+  inline-size: 0.9rem;
+  block-size: 0.9rem;
+}
+
+.sx-support__shapes .c { border-radius: 50%; background: var(--hh-red); }
+.sx-support__shapes .s { background: var(--hh-blue); }
+.sx-support__shapes .t {
+  background: transparent;
+  inline-size: 0;
+  border-inline: 0.45rem solid transparent;
+  border-block-end: 0.9rem solid var(--hh-yellow);
+}
+
+.sx-support__note {
+  font-family: var(--hh-font-mono);
+  font-size: var(--hh-type-micro);
+  text-transform: uppercase;
+  color: var(--hh-muted);
+}
+
+.sx-support .hh-button svg { fill: currentColor; stroke: none; }
+
+/* ==========================================================================
    Footer
    ========================================================================== */
 
 .sx-footer {
   padding-block: var(--hh-space-8) var(--hh-space-6);
-  background: var(--hh-ink);
-  color: var(--hh-paper);
+  background: var(--hh-black);
+  color: var(--hh-cream);
+  --hh-fg: var(--hh-cream);
+  --hh-line-strong: color-mix(in srgb, var(--hh-cream) 30%, transparent);
   border-top: 6px solid var(--hh-red);
 }
 
@@ -734,8 +831,8 @@
 }
 
 .sx-footer__cols nav { display: grid; gap: var(--hh-space-2); }
-.sx-footer__cols a { color: color-mix(in srgb, var(--hh-paper) 76%, transparent); text-decoration: none; width: fit-content; }
-.sx-footer__cols a:hover { color: var(--hh-paper); }
+.sx-footer__cols a { color: color-mix(in srgb, var(--hh-cream) 76%, transparent); text-decoration: none; width: fit-content; }
+.sx-footer__cols a:hover { color: var(--hh-cream); }
 
 @media (max-width: 760px) { .sx-footer__cols { grid-template-columns: 1fr; } }
 

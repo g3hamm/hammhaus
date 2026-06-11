@@ -1,8 +1,11 @@
 /*!
- * Hammhaus v1.1.0
+ * Hammhaus v1.3.0
  * Motto: "Hamm follows form"
  * Copyright (c) 2026 Geoffrey Hamm.
  * Released under the MIT License. Use it, ship it, remix it.
+ *
+ * Dark mode: ships in v1.3. Surfaces follow the OS automatically; force a
+ * mode with <html data-hh-theme="dark"> or "light" (any subtree works).
  *
  * Hammhaus is a portable CSS system adapted from Geoffrey Hamm's
  * editorial portfolio stylesheet. It keeps the paper, ink, and Bauhaus
@@ -23,23 +26,34 @@
    ========================================================================== */
 
 :root {
-  color-scheme: light;
+  /* Follows the OS by default; force with [data-hh-theme] (see end of block). */
+  color-scheme: light dark;
 
-  --hh-paper: #f2ead9;
-  --hh-paper-2: #e5dbc8;
-  --hh-paper-3: #fbf7ef;
-  --hh-ink: #111111;
-  --hh-ink-2: #252525;
-  --hh-muted: #6f675c;
-  --hh-muted-2: #9a9082;
+  /* Fixed brand anchors — never shift with theme. Use these for text or
+     marks that sit ON a bright/bold fill and must keep contrast in any mode
+     (e.g. dark text on yellow, light text on red). */
+  --hh-black: #111111;
+  --hh-cream: #f2ead9;
+
+  /* Adaptive neutral ramp. light-dark(LIGHT, DARK) flips with color-scheme,
+     so page surfaces and default text re-tone automatically in dark mode. */
+  --hh-paper:   light-dark(#f2ead9, #17130d);
+  --hh-paper-2: light-dark(#e5dbc8, #221b13);
+  --hh-paper-3: light-dark(#fbf7ef, #100d08);
+  --hh-ink:     light-dark(#111111, #ece3d0);
+  --hh-ink-2:   light-dark(#252525, #d8cfbb);
+  --hh-muted:   light-dark(#6f675c, #a59c8a);
+  --hh-muted-2: light-dark(#9a9082, #82796b);
   --hh-line: color-mix(in srgb, var(--hh-ink) 18%, transparent);
   --hh-line-strong: color-mix(in srgb, var(--hh-ink) 35%, transparent);
+
+  /* Brand hues — fixed across themes. */
   --hh-red: #d83224;
   --hh-blue: #153b8a;
   --hh-yellow: #f5c542;
   --hh-green: #007f5f;
   --hh-plum: #6b3a8e;
-  --hh-white: #ffffff;
+  --hh-white: light-dark(#ffffff, #f3ecdb); /* the tone surfaces mix toward to elevate */
 
   --hh-bg: var(--hh-paper);
   --hh-fg: var(--hh-ink);
@@ -90,12 +104,37 @@
   --hh-container: 1180px;
   --hh-container-wide: 1480px;
   --hh-gutter: 1.5rem;
+  --hh-scroll-padding: 5.5rem;
   --hh-radius: 8px;
   --hh-radius-sm: 4px;
   --hh-radius-pill: 999px;
   --hh-shadow-hard: 8px 10px 0 var(--hh-ink);
   --hh-shadow-soft: 0 18px 44px color-mix(in srgb, var(--hh-ink) 16%, transparent);
   --hh-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Theme control.
+   - Default: the ramp follows the operating system (prefers-color-scheme).
+   - Force a mode anywhere by setting an attribute, e.g.
+       <html data-hh-theme="dark">   or   <html data-hh-theme="light">
+   Scope it to a subtree to mix themes on one page. */
+:root[data-hh-theme="light"],
+[data-hh-theme="light"] { color-scheme: light; }
+:root[data-hh-theme="dark"],
+[data-hh-theme="dark"] { color-scheme: dark; }
+
+/* Graceful degradation: browsers without light-dark() fall back to light. */
+@supports not (color: light-dark(#000, #fff)) {
+  :root {
+    --hh-paper: #f2ead9;
+    --hh-paper-2: #e5dbc8;
+    --hh-paper-3: #fbf7ef;
+    --hh-ink: #111111;
+    --hh-ink-2: #252525;
+    --hh-muted: #6f675c;
+    --hh-muted-2: #9a9082;
+    --hh-white: #ffffff;
+  }
 }
 
 @media (max-width: 900px) {
@@ -129,6 +168,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Keep in-page anchor targets clear of a sticky header. */
+  scroll-padding-top: var(--hh-scroll-padding);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -196,7 +237,7 @@ a:hover {
 }
 
 ::selection {
-  color: var(--hh-ink);
+  color: var(--hh-black);
   background: var(--hh-yellow);
 }
 
@@ -245,10 +286,26 @@ a:hover {
   color: var(--hh-fg);
 }
 
-/* Dark surfaces share the same paper-tinted hairlines and a yellow focus ring. */
-.hh-section--ink,
+/* Bold brand sections keep fixed light text + a yellow focus ring in any
+   theme, since their fill colour doesn't change. */
 .hh-section--blue,
 .hh-section--red {
+  --hh-fg: var(--hh-cream);
+  --hh-accent: var(--hh-yellow);
+  --hh-focus: var(--hh-yellow);
+  --hh-line: color-mix(in srgb, var(--hh-cream) 18%, transparent);
+  --hh-line-strong: color-mix(in srgb, var(--hh-cream) 35%, transparent);
+  background: var(--hh-bg);
+  color: var(--hh-fg);
+}
+
+.hh-section--blue { --hh-bg: var(--hh-blue); }
+.hh-section--red { --hh-bg: var(--hh-red); }
+
+/* The ink section is an adaptive neutral: a dark band in light mode, and a
+   bright "spotlight" panel in dark mode (ink/paper invert with the theme). */
+.hh-section--ink {
+  --hh-bg: var(--hh-ink);
   --hh-fg: var(--hh-paper);
   --hh-accent: var(--hh-yellow);
   --hh-focus: var(--hh-yellow);
@@ -258,15 +315,11 @@ a:hover {
   color: var(--hh-fg);
 }
 
-.hh-section--ink { --hh-bg: var(--hh-ink); }
-.hh-section--blue { --hh-bg: var(--hh-blue); }
-.hh-section--red { --hh-bg: var(--hh-red); }
-
 .hh-section--yellow {
   --hh-bg: var(--hh-yellow);
-  --hh-fg: var(--hh-ink);
+  --hh-fg: var(--hh-black);
   --hh-accent: var(--hh-red);
-  --hh-focus: var(--hh-ink); /* yellow-on-yellow would be invisible */
+  --hh-focus: var(--hh-black); /* yellow-on-yellow would be invisible */
   background: var(--hh-bg);
   color: var(--hh-fg);
 }
@@ -292,14 +345,21 @@ a:hover {
 
 .hh-split {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+  grid-template-columns: minmax(0, 1fr) minmax(min(18rem, 100%), 0.8fr);
   gap: var(--hh-space-7);
   align-items: center;
 }
 
+/* Grid items default to min-width:auto, which lets a wide child (a long code
+   line, an unbreakable URL) blow past the viewport. Let them shrink so any
+   inner overflow:auto can scroll instead. */
+.hh-split > * {
+  min-width: 0;
+}
+
 @media (max-width: 860px) {
   .hh-split {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -555,10 +615,19 @@ a:hover {
   z-index: 10000;
   width: 0;
   height: 0;
-  color: var(--hh-ink);
+  /* White + difference blend = the cursor inverts against whatever is
+     behind it, so it stays visible on ink, paper, red, yellow — any
+     surface. No JS needed for the color; only position is scripted. */
+  color: var(--hh-white);
+  mix-blend-mode: difference;
   pointer-events: none;
   transform: translate3d(var(--hh-cursor-x), var(--hh-cursor-y), 0);
   transition: opacity 160ms var(--hh-ease);
+}
+
+/* If a browser can't blend, fall back to a solid ink cursor. */
+@supports not (mix-blend-mode: difference) {
+  .hh-cursor { color: var(--hh-ink); mix-blend-mode: normal; }
 }
 
 .hh-cursor__dot,
@@ -691,8 +760,8 @@ a:hover {
   margin-block-start: var(--hh-space-5);
   padding: var(--hh-space-2) var(--hh-space-3);
   background: var(--hh-yellow);
-  color: var(--hh-ink);
-  border: 1px solid var(--hh-ink);
+  color: var(--hh-black);
+  border: 1px solid var(--hh-black);
   border-radius: var(--hh-radius-sm);
   font-family: var(--hh-font-mono);
   font-size: var(--hh-type-small);
@@ -786,14 +855,14 @@ a:hover {
 
 .hh-button--blue {
   --hh-button-bg: var(--hh-blue);
-  --hh-button-fg: var(--hh-paper);
+  --hh-button-fg: var(--hh-cream);
   --hh-button-border: var(--hh-blue);
 }
 
 .hh-button--yellow {
   --hh-button-bg: var(--hh-yellow);
-  --hh-button-fg: var(--hh-ink);
-  --hh-button-border: var(--hh-ink);
+  --hh-button-fg: var(--hh-black);
+  --hh-button-border: var(--hh-black);
 }
 
 .hh-button--ghost {
@@ -911,18 +980,18 @@ a:hover {
 
 .hh-badge {
   background: var(--hh-yellow);
-  color: var(--hh-ink);
-  border-color: var(--hh-ink);
+  color: var(--hh-black);
+  border-color: var(--hh-black);
 }
 
 .hh-badge--red {
   background: var(--hh-red);
-  color: var(--hh-paper);
+  color: var(--hh-cream);
 }
 
 .hh-badge--blue {
   background: var(--hh-blue);
-  color: var(--hh-paper);
+  color: var(--hh-cream);
 }
 
 .hh-chip {
@@ -1087,9 +1156,55 @@ a:hover {
 }
 
 .hh-switch input:checked + .hh-switch__track::before {
-  background: var(--hh-ink);
+  background: var(--hh-black);
   transform: translateX(1.5rem);
 }
+
+.hh-range {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 1.4rem;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hh-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: var(--hh-radius-pill);
+  background: color-mix(in srgb, currentColor 26%, transparent);
+}
+
+.hh-range::-moz-range-track {
+  height: 4px;
+  border-radius: var(--hh-radius-pill);
+  background: color-mix(in srgb, currentColor 26%, transparent);
+}
+
+.hh-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: calc((4px - 1.2rem) / 2);
+  border-radius: 50%;
+  background: var(--hh-accent);
+  border: 2px solid var(--hh-fg);
+  transition: transform 160ms var(--hh-ease);
+}
+
+.hh-range::-moz-range-thumb {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: var(--hh-accent);
+  border: 2px solid var(--hh-fg);
+  transition: transform 160ms var(--hh-ease);
+}
+
+.hh-range:hover::-webkit-slider-thumb { transform: scale(1.18); }
+.hh-range:hover::-moz-range-thumb { transform: scale(1.18); }
 
 /* ==========================================================================
    Feedback: alerts, stats, progress
@@ -1192,9 +1307,11 @@ a:hover {
 }
 
 .hh-progress__bar {
+  display: block;
   block-size: 100%;
   inline-size: var(--hh-progress, 50%);
   background: var(--hh-accent);
+  transition: inline-size 280ms var(--hh-ease);
 }
 
 /* ==========================================================================
@@ -1303,7 +1420,7 @@ a:hover {
 .hh-accordion details[open] summary::after {
   content: "-";
   background: var(--hh-yellow);
-  color: var(--hh-ink);
+  color: var(--hh-black);
 }
 
 .hh-accordion__body {
@@ -1320,6 +1437,281 @@ a:hover {
   border: 1px solid var(--hh-line-strong);
   border-radius: var(--hh-radius-pill);
   background: color-mix(in srgb, currentColor 7%, transparent);
+}
+
+.hh-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--hh-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--hh-font-mono);
+  font-size: var(--hh-type-micro);
+  text-transform: uppercase;
+}
+
+.hh-breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--hh-space-2);
+}
+
+.hh-breadcrumbs li + li::before {
+  content: "/";
+  color: color-mix(in srgb, currentColor 40%, var(--hh-bg));
+}
+
+.hh-breadcrumbs a {
+  text-decoration: none;
+  color: color-mix(in srgb, currentColor 66%, var(--hh-bg));
+}
+
+.hh-breadcrumbs a:hover { color: currentColor; }
+
+.hh-breadcrumbs [aria-current="page"] { font-weight: 700; }
+
+.hh-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hh-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hh-page {
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: 2.4rem;
+  block-size: 2.4rem;
+  padding-inline: 0.5rem;
+  font: inherit;
+  font-weight: 700;
+  color: currentColor;
+  background: transparent;
+  border: 1.5px solid var(--hh-line-strong);
+  border-radius: var(--hh-radius-sm);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 160ms var(--hh-ease), background-color 160ms var(--hh-ease);
+}
+
+.hh-page:hover { border-color: currentColor; }
+
+.hh-page[aria-current="page"] {
+  background: var(--hh-fg);
+  color: var(--hh-bg);
+  border-color: var(--hh-fg);
+}
+
+/* ==========================================================================
+   Voice: quote, list, divider, kbd
+   ========================================================================== */
+
+.hh-quote {
+  display: grid;
+  gap: var(--hh-space-3);
+  margin: 0;
+  padding-inline-start: var(--hh-space-5);
+  border-inline-start: 6px solid var(--hh-accent);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.hh-quote footer {
+  font-family: var(--hh-font-mono);
+  font-size: var(--hh-type-small);
+  font-weight: 400;
+  color: color-mix(in srgb, currentColor 62%, var(--hh-bg));
+}
+
+.hh-list {
+  display: grid;
+  gap: var(--hh-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hh-list li {
+  display: flex;
+  gap: var(--hh-space-3);
+}
+
+.hh-list li::before {
+  content: "";
+  flex: 0 0 auto;
+  inline-size: 0.5em;
+  block-size: 0.5em;
+  margin-block-start: 0.5em;
+  background: var(--hh-accent);
+}
+
+.hh-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--hh-space-3);
+  font-family: var(--hh-font-mono);
+  font-size: var(--hh-type-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: color-mix(in srgb, currentColor 60%, var(--hh-bg));
+}
+
+.hh-divider::before,
+.hh-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--hh-line-strong);
+}
+
+.hh-kbd {
+  font-family: var(--hh-font-mono);
+  font-size: 0.85em;
+  padding: 0.12em 0.45em;
+  background: color-mix(in srgb, currentColor 7%, transparent);
+  border: 1.5px solid var(--hh-line-strong);
+  border-bottom-width: 3px;
+  border-radius: var(--hh-radius-sm);
+}
+
+/* ==========================================================================
+   People & signals: avatar, tooltip, spinner, skeleton
+   ========================================================================== */
+
+.hh-avatar {
+  display: inline-grid;
+  place-items: center;
+  inline-size: var(--hh-avatar-size, 2.6rem);
+  block-size: var(--hh-avatar-size, 2.6rem);
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid var(--hh-fg);
+  background: var(--hh-avatar-bg, var(--hh-blue));
+  color: var(--hh-avatar-fg, var(--hh-cream));
+  font-weight: 800;
+  font-size: calc(var(--hh-avatar-size, 2.6rem) * 0.36);
+  text-transform: uppercase;
+  flex: 0 0 auto;
+}
+
+.hh-avatar img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.hh-avatar--square { border-radius: var(--hh-radius-sm); }
+
+.hh-avatar-group {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hh-avatar-group .hh-avatar {
+  margin-inline-start: -0.6rem;
+  box-shadow: 0 0 0 2px var(--hh-bg);
+}
+
+.hh-avatar-group .hh-avatar:first-child { margin-inline-start: 0; }
+
+/* Tooltip: add data-hh-tip="text" to any focusable element. */
+[data-hh-tip] { position: relative; }
+
+[data-hh-tip]::after {
+  content: attr(data-hh-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.55rem);
+  z-index: 60;
+  transform: translateX(-50%) translateY(4px);
+  padding: 0.35rem 0.6rem;
+  font-family: var(--hh-font-mono);
+  font-size: var(--hh-type-micro);
+  font-weight: 400;
+  line-height: 1.35;
+  text-transform: none;
+  white-space: nowrap;
+  color: var(--hh-paper);
+  background: var(--hh-ink);
+  border: 1px solid color-mix(in srgb, var(--hh-paper) 28%, transparent);
+  border-radius: var(--hh-radius-sm);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms var(--hh-ease), transform 160ms var(--hh-ease);
+}
+
+[data-hh-tip]:hover::after,
+[data-hh-tip]:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.hh-spinner {
+  display: inline-block;
+  inline-size: var(--hh-spinner-size, 2.5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(var(--hh-red) 0 25%, var(--hh-blue) 0 50%, var(--hh-yellow) 0 75%, var(--hh-green) 0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 0.5rem), #000 calc(100% - 0.5rem + 1px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 0.5rem), #000 calc(100% - 0.5rem + 1px));
+  animation: hh-spin 1.1s linear infinite;
+  flex: 0 0 auto;
+}
+
+@keyframes hh-spin {
+  to { transform: rotate(1turn); }
+}
+
+.hh-skeleton {
+  display: block;
+  block-size: var(--hh-skeleton-h, 1rem);
+  border-radius: var(--hh-radius-sm);
+  background: linear-gradient(
+      100deg,
+      color-mix(in srgb, currentColor 10%, transparent) 40%,
+      color-mix(in srgb, currentColor 20%, transparent) 50%,
+      color-mix(in srgb, currentColor 10%, transparent) 60%
+    )
+    0 0 / 200% 100%;
+  animation: hh-shimmer 1.6s linear infinite;
+}
+
+.hh-skeleton--circle {
+  inline-size: var(--hh-skeleton-h, 2.6rem);
+  block-size: var(--hh-skeleton-h, 2.6rem);
+  border-radius: 50%;
+}
+
+@keyframes hh-shimmer {
+  to { background-position: -200% 0; }
+}
+
+/* ==========================================================================
+   Dialog (styles the native <dialog> element)
+   ========================================================================== */
+
+.hh-dialog {
+  width: min(92vw, 32rem);
+  padding: var(--hh-space-6);
+  color: var(--hh-ink);
+  background: var(--hh-paper-3);
+  border: 2px solid var(--hh-ink);
+  border-radius: var(--hh-radius);
+  box-shadow: var(--hh-shadow-hard);
+}
+
+.hh-dialog::backdrop {
+  background: rgba(17, 17, 17, 0.55);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
 }
 
 /* ==========================================================================
@@ -1447,3 +1839,50 @@ a:hover {
 .hh-mb-0 { margin-bottom: 0; }
 .hh-p-0 { padding: 0; }
 .hh-hidden { display: none !important; }
+
+/* ==========================================================================
+   Print: ink on white, drop the theater
+   ========================================================================== */
+
+@media print {
+  body {
+    background: #fff !important;
+    color: #000;
+  }
+
+  .hh-cursor,
+  .hh-marquee,
+  .hh-nav {
+    display: none !important;
+  }
+
+  .hh-section {
+    padding-block: var(--hh-space-4);
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .hh-card,
+  .hh-button,
+  .hh-table-wrap,
+  .hh-code-block {
+    box-shadow: none !important;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  /* Surface links so a printed page keeps its references. */
+  .hh-prose a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+
+  .hh-section,
+  .hh-card,
+  .hh-table {
+    break-inside: avoid;
+  }
+}

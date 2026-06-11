@@ -1,0 +1,103 @@
+# Hammhaus
+
+> A portable, token-driven CSS design system. One stylesheet, zero runtime
+> dependencies, ~40 components. Editorial Bauhaus aesthetic: paper, ink, and
+> primary-color conviction. MIT licensed. Motto: "Hamm follows form."
+
+Hammhaus is plain CSS. There is no build step, no JavaScript requirement, and
+no framework. You style HTML by adding `hh-`prefixed classes, and you theme by
+overriding `--hh-*` CSS custom properties (globally at `:root` or scoped to any
+element/section). All class and token names use the `hh-` namespace so it never
+collides with existing styles.
+
+## Install
+
+Add to the document `<head>` (fonts are Archivo + JetBrains Mono):
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@main/hammhaus.css">
+```
+
+Or self-host: download `hammhaus.css` and link it locally. The fonts are
+optional — the system falls back to `system-ui` if they are absent.
+
+## Core model
+
+- Layout: `.hh-container`, `.hh-container--wide`, `.hh-section` (+ surface
+  modifiers `--paper`, `--white`, `--ink`, `--blue`, `--red`, `--yellow`),
+  `.hh-stack`, `.hh-cluster`, `.hh-grid`, `.hh-split`, `.hh-full-bleed`.
+- Type: `.hh-display`, `.hh-title`, `.hh-section-title`, `.hh-subhead`,
+  `.hh-lede`, `.hh-kicker`, `.hh-label`, `.hh-mono`, `.hh-prose`, `.hh-quote`,
+  `.hh-list`, `.hh-code`, `.hh-code-block`, `.hh-kbd`, `.hh-divider`.
+- Actions: `.hh-button` (+ `--primary`, `--blue`, `--yellow`, `--ghost`,
+  `--small`, `--large`, `--block`), `.hh-icon-button`.
+- Forms: `.hh-form`, `.hh-field` (+ `--error`, `--success`), `.hh-input`,
+  `.hh-select`, `.hh-textarea`, `.hh-help`, `.hh-check`, `.hh-radio`,
+  `.hh-switch`, `.hh-range`.
+- Content: `.hh-card` (+ `--raised`, `--hard`, `--inverse`, `.hh-card__media`),
+  `.hh-badge`, `.hh-chip`, `.hh-dot`, `.hh-avatar` / `.hh-avatar-group`,
+  `.hh-alert` (+ `--success`, `--warning`, `--danger`, `--info`),
+  `.hh-stat-grid` / `.hh-stat`, `.hh-progress`, `.hh-table`, `.hh-timeline`,
+  `.hh-accordion`, `.hh-tabs` / `.hh-tab`, `.hh-segmented` / `.hh-segment`,
+  `.hh-breadcrumbs`, `.hh-pagination`, `.hh-spinner`, `.hh-skeleton`,
+  `.hh-dialog` (styles native `<dialog>`), `.hh-tooltip` via `data-hh-tip`.
+
+## Theming with tokens
+
+Override custom properties; never fight specificity. Key tokens:
+
+```css
+:root {
+  --hh-accent: var(--hh-blue);     /* default accent */
+  --hh-container: 1280px;          /* max content width */
+  --hh-radius: 8px;                /* corner radius */
+  --hh-tracking-display: -0.035em; /* headline letter-spacing */
+  --hh-shadow-hard: 8px 10px 0 var(--hh-ink);
+}
+
+/* Scope a theme to one section by overriding bg/fg/accent: */
+.launch { --hh-bg: var(--hh-ink); --hh-fg: var(--hh-paper); --hh-accent: var(--hh-yellow); }
+```
+
+Colors: `--hh-paper`, `--hh-ink`, `--hh-red`, `--hh-blue`, `--hh-yellow`,
+`--hh-green`, `--hh-plum`. Fixed text anchors for on-color text: `--hh-black`,
+`--hh-cream`. Spacing scale: `--hh-space-1` … `--hh-space-9`.
+
+## Dark mode
+
+Surfaces follow the operating system automatically. Force a mode by setting an
+attribute (works on `<html>` or any subtree):
+
+```html
+<html data-hh-theme="dark">  <!-- or "light"; omit to follow the OS -->
+```
+
+## Minimal example
+
+```html
+<section class="hh-section hh-section--paper">
+  <div class="hh-container hh-stack">
+    <span class="hh-kicker">New project</span>
+    <h1 class="hh-display">Hamm follows form.</h1>
+    <p class="hh-lede">Build with paper, ink, and guts.</p>
+    <a class="hh-button hh-button--primary" href="#">Start</a>
+  </div>
+</section>
+```
+
+## Rules of thumb for agents
+
+- Reach for an existing `hh-` class before writing custom CSS.
+- Wrap page content in `.hh-section` > `.hh-container`; use `.hh-stack`,
+  `.hh-cluster`, and `.hh-grid` for spacing instead of ad-hoc margins.
+- Change look and feel by overriding `--hh-*` tokens, not by editing the file.
+- The stylesheet is pure CSS; do not add a JS dependency to use it.
+
+## Links
+
+- Stylesheet (CDN): https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@main/hammhaus.css
+- Source: https://github.com/g3hamm/hammhaus
+- License: MIT
