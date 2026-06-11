@@ -1,10 +1,13 @@
 /*!
- * Hammhaus Showcase — page theater for showcase.html
+ * Hammhaus Showcase — page-specific styles for index.html (the style guide)
  *
- * Everything here is scoped to the .sx-* namespace and exists only to stage
- * the showcase page. It depends on hammhaus.css for tokens and components;
- * nothing in this file belongs in the portable system. The star of the page
- * is hammhaus.css — these styles are the gallery walls, not the art.
+ * Why this file is separate from hammhaus.css: hammhaus.css is the portable
+ * product people download; this file is the gallery walls — hero set pieces,
+ * playground controls, watermark numerals — that exist only on this page.
+ * Keeping them apart means the downloadable system ships zero demo weight.
+ * Everything here is scoped to the .sx-* namespace and depends on
+ * hammhaus.css for tokens and components. The star is hammhaus.css —
+ * these styles are the gallery walls, not the art.
  */
 
 /* ==========================================================================
