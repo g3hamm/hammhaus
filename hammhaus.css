@@ -1,8 +1,11 @@
 /*!
- * Hammhaus v1.2.0
+ * Hammhaus v1.3.0
  * Motto: "Hamm follows form"
  * Copyright (c) 2026 Geoffrey Hamm.
  * Released under the MIT License. Use it, ship it, remix it.
+ *
+ * Dark mode: ships in v1.3. Surfaces follow the OS automatically; force a
+ * mode with <html data-hh-theme="dark"> or "light" (any subtree works).
  *
  * Hammhaus is a portable CSS system adapted from Geoffrey Hamm's
  * editorial portfolio stylesheet. It keeps the paper, ink, and Bauhaus
@@ -23,23 +26,34 @@
    ========================================================================== */
 
 :root {
-  color-scheme: light;
+  /* Follows the OS by default; force with [data-hh-theme] (see end of block). */
+  color-scheme: light dark;
 
-  --hh-paper: #f2ead9;
-  --hh-paper-2: #e5dbc8;
-  --hh-paper-3: #fbf7ef;
-  --hh-ink: #111111;
-  --hh-ink-2: #252525;
-  --hh-muted: #6f675c;
-  --hh-muted-2: #9a9082;
+  /* Fixed brand anchors — never shift with theme. Use these for text or
+     marks that sit ON a bright/bold fill and must keep contrast in any mode
+     (e.g. dark text on yellow, light text on red). */
+  --hh-black: #111111;
+  --hh-cream: #f2ead9;
+
+  /* Adaptive neutral ramp. light-dark(LIGHT, DARK) flips with color-scheme,
+     so page surfaces and default text re-tone automatically in dark mode. */
+  --hh-paper:   light-dark(#f2ead9, #17130d);
+  --hh-paper-2: light-dark(#e5dbc8, #221b13);
+  --hh-paper-3: light-dark(#fbf7ef, #100d08);
+  --hh-ink:     light-dark(#111111, #ece3d0);
+  --hh-ink-2:   light-dark(#252525, #d8cfbb);
+  --hh-muted:   light-dark(#6f675c, #a59c8a);
+  --hh-muted-2: light-dark(#9a9082, #82796b);
   --hh-line: color-mix(in srgb, var(--hh-ink) 18%, transparent);
   --hh-line-strong: color-mix(in srgb, var(--hh-ink) 35%, transparent);
+
+  /* Brand hues — fixed across themes. */
   --hh-red: #d83224;
   --hh-blue: #153b8a;
   --hh-yellow: #f5c542;
   --hh-green: #007f5f;
   --hh-plum: #6b3a8e;
-  --hh-white: #ffffff;
+  --hh-white: light-dark(#ffffff, #f3ecdb); /* the tone surfaces mix toward to elevate */
 
   --hh-bg: var(--hh-paper);
   --hh-fg: var(--hh-ink);
@@ -97,6 +111,30 @@
   --hh-shadow-hard: 8px 10px 0 var(--hh-ink);
   --hh-shadow-soft: 0 18px 44px color-mix(in srgb, var(--hh-ink) 16%, transparent);
   --hh-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Theme control.
+   - Default: the ramp follows the operating system (prefers-color-scheme).
+   - Force a mode anywhere by setting an attribute, e.g.
+       <html data-hh-theme="dark">   or   <html data-hh-theme="light">
+   Scope it to a subtree to mix themes on one page. */
+:root[data-hh-theme="light"],
+[data-hh-theme="light"] { color-scheme: light; }
+:root[data-hh-theme="dark"],
+[data-hh-theme="dark"] { color-scheme: dark; }
+
+/* Graceful degradation: browsers without light-dark() fall back to light. */
+@supports not (color: light-dark(#000, #fff)) {
+  :root {
+    --hh-paper: #f2ead9;
+    --hh-paper-2: #e5dbc8;
+    --hh-paper-3: #fbf7ef;
+    --hh-ink: #111111;
+    --hh-ink-2: #252525;
+    --hh-muted: #6f675c;
+    --hh-muted-2: #9a9082;
+    --hh-white: #ffffff;
+  }
 }
 
 @media (max-width: 900px) {
@@ -199,7 +237,7 @@ a:hover {
 }
 
 ::selection {
-  color: var(--hh-ink);
+  color: var(--hh-black);
   background: var(--hh-yellow);
 }
 
@@ -248,10 +286,26 @@ a:hover {
   color: var(--hh-fg);
 }
 
-/* Dark surfaces share the same paper-tinted hairlines and a yellow focus ring. */
-.hh-section--ink,
+/* Bold brand sections keep fixed light text + a yellow focus ring in any
+   theme, since their fill colour doesn't change. */
 .hh-section--blue,
 .hh-section--red {
+  --hh-fg: var(--hh-cream);
+  --hh-accent: var(--hh-yellow);
+  --hh-focus: var(--hh-yellow);
+  --hh-line: color-mix(in srgb, var(--hh-cream) 18%, transparent);
+  --hh-line-strong: color-mix(in srgb, var(--hh-cream) 35%, transparent);
+  background: var(--hh-bg);
+  color: var(--hh-fg);
+}
+
+.hh-section--blue { --hh-bg: var(--hh-blue); }
+.hh-section--red { --hh-bg: var(--hh-red); }
+
+/* The ink section is an adaptive neutral: a dark band in light mode, and a
+   bright "spotlight" panel in dark mode (ink/paper invert with the theme). */
+.hh-section--ink {
+  --hh-bg: var(--hh-ink);
   --hh-fg: var(--hh-paper);
   --hh-accent: var(--hh-yellow);
   --hh-focus: var(--hh-yellow);
@@ -261,15 +315,11 @@ a:hover {
   color: var(--hh-fg);
 }
 
-.hh-section--ink { --hh-bg: var(--hh-ink); }
-.hh-section--blue { --hh-bg: var(--hh-blue); }
-.hh-section--red { --hh-bg: var(--hh-red); }
-
 .hh-section--yellow {
   --hh-bg: var(--hh-yellow);
-  --hh-fg: var(--hh-ink);
+  --hh-fg: var(--hh-black);
   --hh-accent: var(--hh-red);
-  --hh-focus: var(--hh-ink); /* yellow-on-yellow would be invisible */
+  --hh-focus: var(--hh-black); /* yellow-on-yellow would be invisible */
   background: var(--hh-bg);
   color: var(--hh-fg);
 }
@@ -703,8 +753,8 @@ a:hover {
   margin-block-start: var(--hh-space-5);
   padding: var(--hh-space-2) var(--hh-space-3);
   background: var(--hh-yellow);
-  color: var(--hh-ink);
-  border: 1px solid var(--hh-ink);
+  color: var(--hh-black);
+  border: 1px solid var(--hh-black);
   border-radius: var(--hh-radius-sm);
   font-family: var(--hh-font-mono);
   font-size: var(--hh-type-small);
@@ -798,14 +848,14 @@ a:hover {
 
 .hh-button--blue {
   --hh-button-bg: var(--hh-blue);
-  --hh-button-fg: var(--hh-paper);
+  --hh-button-fg: var(--hh-cream);
   --hh-button-border: var(--hh-blue);
 }
 
 .hh-button--yellow {
   --hh-button-bg: var(--hh-yellow);
-  --hh-button-fg: var(--hh-ink);
-  --hh-button-border: var(--hh-ink);
+  --hh-button-fg: var(--hh-black);
+  --hh-button-border: var(--hh-black);
 }
 
 .hh-button--ghost {
@@ -923,18 +973,18 @@ a:hover {
 
 .hh-badge {
   background: var(--hh-yellow);
-  color: var(--hh-ink);
-  border-color: var(--hh-ink);
+  color: var(--hh-black);
+  border-color: var(--hh-black);
 }
 
 .hh-badge--red {
   background: var(--hh-red);
-  color: var(--hh-paper);
+  color: var(--hh-cream);
 }
 
 .hh-badge--blue {
   background: var(--hh-blue);
-  color: var(--hh-paper);
+  color: var(--hh-cream);
 }
 
 .hh-chip {
@@ -1099,7 +1149,7 @@ a:hover {
 }
 
 .hh-switch input:checked + .hh-switch__track::before {
-  background: var(--hh-ink);
+  background: var(--hh-black);
   transform: translateX(1.5rem);
 }
 
@@ -1363,7 +1413,7 @@ a:hover {
 .hh-accordion details[open] summary::after {
   content: "-";
   background: var(--hh-yellow);
-  color: var(--hh-ink);
+  color: var(--hh-black);
 }
 
 .hh-accordion__body {
@@ -1536,7 +1586,7 @@ a:hover {
   border-radius: 50%;
   border: 2px solid var(--hh-fg);
   background: var(--hh-avatar-bg, var(--hh-blue));
-  color: var(--hh-avatar-fg, var(--hh-paper));
+  color: var(--hh-avatar-fg, var(--hh-cream));
   font-weight: 800;
   font-size: calc(var(--hh-avatar-size, 2.6rem) * 0.36);
   text-transform: uppercase;

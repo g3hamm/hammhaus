@@ -8,8 +8,18 @@
       name="description"
       content="Hammhaus is a portable, token-driven CSS system. Paper, ink, and primary-color conviction. Hamm follows form."
     >
-    <meta name="color-scheme" content="light">
-    <meta name="theme-color" content="#f2ead9">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#f2ead9" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#17130d" media="(prefers-color-scheme: dark)">
+    <script>
+      /* No-flash: apply a saved theme before first paint. */
+      (function () {
+        try {
+          var t = localStorage.getItem("hh-theme");
+          if (t === "dark" || t === "light") document.documentElement.setAttribute("data-hh-theme", t);
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f2ead9'/%3E%3Ccircle cx='9' cy='9' r='6' fill='%23d83224'/%3E%3Crect x='17' y='3' width='12' height='12' fill='%23153b8a'/%3E%3Cpath d='M9 17 15 29 3 29Z' fill='%23f5c542'/%3E%3Ccircle cx='23' cy='23' r='5' fill='none' stroke='%23111' stroke-width='2'/%3E%3C/svg%3E">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Hammhaus — a CSS system with a point of view">
@@ -52,11 +62,18 @@
           <a href="#components">Components</a>
           <a href="#patterns">Patterns</a>
           <a href="#start">Start</a>
+          <a href="#agents">AI</a>
         </div>
-        <a class="hh-button hh-button--primary hh-button--small" href="./hammhaus.css" download="hammhaus.css">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
-          Get the CSS
-        </a>
+        <div class="hh-cluster" style="--hh-cluster-gap: var(--hh-space-3);">
+          <button class="hh-icon-button sx-theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode" aria-pressed="false">
+            <svg class="sx-i-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            <svg class="sx-i-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          </button>
+          <a class="hh-button hh-button--primary hh-button--small" href="./hammhaus.css" download="hammhaus.css">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            Get the CSS
+          </a>
+        </div>
       </div>
     </nav>
 
@@ -830,7 +847,7 @@
             </div>
             <div class="sx-step">
               <h3 class="hh-subhead">Theme</h3>
-              <p class="hh-muted">Override <code class="hh-code">--hh-*</code> tokens globally or per section.</p>
+              <p class="hh-muted">Override <code class="hh-code">--hh-*</code> tokens globally or per section. Dark mode follows the OS — or force it with <code class="hh-code">&lt;html data-hh-theme="dark"&gt;</code>.</p>
             </div>
           </div>
 
@@ -861,6 +878,53 @@
   --hh-accent: var(--hh-yellow);
 }</code></pre>
               <button class="sx-copy-btn" type="button" data-copy-prev>Copy</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           For your AI / vibe coding
+           ================================================================= -->
+      <section class="hh-section hh-section--ink sx-section" id="agents" aria-labelledby="agents-title">
+        <span class="sx-wm" aria-hidden="true">AI</span>
+        <div class="hh-container">
+          <div class="sx-head sx-reveal">
+            <span class="sx-head__index">09 / For your AI</span>
+            <div class="sx-head__body">
+              <h2 class="hh-display" id="agents-title">Hand it to a coding agent.</h2>
+              <p class="hh-lede sx-head__lead">Building with an AI? Point it at one hosted file and a machine-readable guide — it'll know the whole vocabulary.</p>
+            </div>
+          </div>
+
+          <div class="hh-split sx-reveal" style="--hh-space-7: var(--hh-space-6);">
+            <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-4);">
+              <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);">
+                <span class="hh-label hh-mb-0">1 · Drop in the CDN link</span>
+                <p class="hh-muted hh-mb-0">No install, no build. One <code class="hh-code">&lt;link&gt;</code> and every <code class="hh-code">hh-</code> class works.</p>
+              </div>
+              <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);">
+                <span class="hh-label hh-mb-0">2 · Give it the guide</span>
+                <p class="hh-muted hh-mb-0">Point the agent at <a class="hh-accent" href="./llms.txt"><code class="hh-code">llms.txt</code></a> — a concise spec of tokens, classes, and rules of thumb written for LLMs.</p>
+              </div>
+              <div class="hh-cluster">
+                <a class="hh-button hh-button--yellow" href="./llms.txt">View llms.txt</a>
+                <span class="hh-chip"><span class="hh-dot hh-dot--green"></span>MIT — no attribution required</span>
+              </div>
+            </div>
+
+            <div class="sx-codeblock">
+              <span class="hh-label">Paste this to your AI</span>
+              <pre class="hh-code-block"><code id="sx-agent-snippet">Use the Hammhaus CSS system for styling.
+
+Add to &lt;head&gt;:
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@main/hammhaus.css"&gt;
+
+Full guide (tokens, classes, examples):
+https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@main/llms.txt
+
+Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS, no JS.</code></pre>
+              <button class="sx-copy-btn" type="button" data-copy-prev style="top: 2.4rem;">Copy</button>
             </div>
           </div>
         </div>
@@ -1095,6 +1159,27 @@
         document.querySelectorAll("[data-dialog-open]").forEach((btn) => {
           btn.addEventListener("click", () => document.getElementById(btn.dataset.dialogOpen)?.showModal());
         });
+
+        /* ---- Theme toggle (follows OS until the user chooses) ---------- */
+        const root = document.documentElement;
+        const themeToggle = document.querySelector("[data-theme-toggle]");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+        const effectiveTheme = () => root.getAttribute("data-hh-theme") || (prefersDark.matches ? "dark" : "light");
+        const syncToggle = () => {
+          const mode = effectiveTheme();
+          themeToggle?.setAttribute("data-mode", mode);
+          themeToggle?.setAttribute("aria-pressed", String(mode === "dark"));
+          themeToggle?.setAttribute("aria-label", mode === "dark" ? "Switch to light mode" : "Switch to dark mode");
+        };
+        themeToggle?.addEventListener("click", () => {
+          const next = effectiveTheme() === "dark" ? "light" : "dark";
+          root.setAttribute("data-hh-theme", next);
+          try { localStorage.setItem("hh-theme", next); } catch (e) {}
+          syncToggle();
+          showToast(next === "dark" ? "Dark mode on" : "Light mode on");
+        });
+        prefersDark.addEventListener("change", syncToggle);
+        syncToggle();
 
         /* ---- Scroll reveal -------------------------------------------- */
         const reveals = document.querySelectorAll(".sx-reveal");

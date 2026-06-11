@@ -82,6 +82,11 @@
   border-radius: var(--hh-radius-pill);
 }
 
+/* Theme toggle: show the sun when dark is active, the moon when light. */
+.sx-theme-toggle .sx-i-sun { display: none; }
+.sx-theme-toggle[data-mode="dark"] .sx-i-sun { display: block; }
+.sx-theme-toggle[data-mode="dark"] .sx-i-moon { display: none; }
+
 /* ==========================================================================
    Section heads (big numbered editorial headers)
    ========================================================================== */
@@ -295,10 +300,11 @@
    Marquee band
    ========================================================================== */
 
+/* Chrome bands stay dark in both themes (fixed brand anchors). */
 .sx-band {
-  border-block: 2px solid var(--hh-ink);
-  background: var(--hh-ink);
-  color: var(--hh-paper);
+  border-block: 2px solid var(--hh-black);
+  background: var(--hh-black);
+  color: var(--hh-cream);
 }
 
 .sx-band .hh-marquee { border-block: 0; }
@@ -784,8 +790,10 @@
 
 .sx-footer {
   padding-block: var(--hh-space-8) var(--hh-space-6);
-  background: var(--hh-ink);
-  color: var(--hh-paper);
+  background: var(--hh-black);
+  color: var(--hh-cream);
+  --hh-fg: var(--hh-cream);
+  --hh-line-strong: color-mix(in srgb, var(--hh-cream) 30%, transparent);
   border-top: 6px solid var(--hh-red);
 }
 
@@ -804,8 +812,8 @@
 }
 
 .sx-footer__cols nav { display: grid; gap: var(--hh-space-2); }
-.sx-footer__cols a { color: color-mix(in srgb, var(--hh-paper) 76%, transparent); text-decoration: none; width: fit-content; }
-.sx-footer__cols a:hover { color: var(--hh-paper); }
+.sx-footer__cols a { color: color-mix(in srgb, var(--hh-cream) 76%, transparent); text-decoration: none; width: fit-content; }
+.sx-footer__cols a:hover { color: var(--hh-cream); }
 
 @media (max-width: 760px) { .sx-footer__cols { grid-template-columns: 1fr; } }
 
