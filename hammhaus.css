@@ -345,14 +345,21 @@ a:hover {
 
 .hh-split {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+  grid-template-columns: minmax(0, 1fr) minmax(min(18rem, 100%), 0.8fr);
   gap: var(--hh-space-7);
   align-items: center;
 }
 
+/* Grid items default to min-width:auto, which lets a wide child (a long code
+   line, an unbreakable URL) blow past the viewport. Let them shrink so any
+   inner overflow:auto can scroll instead. */
+.hh-split > * {
+  min-width: 0;
+}
+
 @media (max-width: 860px) {
   .hh-split {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 

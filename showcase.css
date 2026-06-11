@@ -87,6 +87,22 @@
 .sx-theme-toggle[data-mode="dark"] .sx-i-sun { display: block; }
 .sx-theme-toggle[data-mode="dark"] .sx-i-moon { display: none; }
 
+/* This page carries more nav links than the base system (plus a theme
+   toggle), so stack to a scrollable row earlier to avoid a crowded-row
+   overflow on tablets. */
+@media (max-width: 920px) {
+  .sx-page .hh-nav__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-block: var(--hh-space-4);
+  }
+  .sx-nav__links {
+    width: 100%;
+    overflow-x: auto;
+    padding-block-end: var(--hh-space-1);
+  }
+}
+
 /* ==========================================================================
    Section heads (big numbered editorial headers)
    ========================================================================== */
