@@ -100,6 +100,8 @@ Style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS, no JS.
 | `index.html` | The live style guide / showcase page. |
 | `showcase.css` | Page-only styles for the showcase (the `sx-` namespace). Not part of the system. |
 | `llms.txt` | Machine-readable guide for AI agents. |
+| `og-image.png` | Social share card (Open Graph / Twitter / LinkedIn). |
+| `og-image.html` | Generator page for the share card — screenshot it at 1200×630. |
 | `LICENSE` | MIT. |
 
 > `hammhaus.css` and `showcase.css` are deliberately separate: the first is the

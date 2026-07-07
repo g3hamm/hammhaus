@@ -335,6 +335,12 @@
   color: var(--hh-red);
 }
 
+/* The verb leans into the sentence — roman, italic, then the red payoff. */
+.sx-hero__title i {
+  font-style: italic;
+  letter-spacing: -0.03em; /* italics set a touch looser at 900 */
+}
+
 .sx-hero__stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -916,6 +922,13 @@
 
 .sx-codeblock { position: relative; }
 
+/* The agent snippet carries two long CDN URLs; wrap them instead of
+   forcing an ugly horizontal scrollbar across the panel. */
+#agents .sx-codeblock .hh-code-block {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 /* The two side-by-side snippets in Start should read as one unit: stretch
    both columns and let each code block fill its column's height. */
 #start .hh-split {
@@ -1013,8 +1026,10 @@
   font-size: clamp(3rem, 12vw, 8rem);
   line-height: 0.85;
   letter-spacing: var(--hh-tracking-hero);
-  /* Tuck the motto row up under the wordmark. */
-  margin-block-end: calc(var(--hh-space-4) * -1);
+  /* Tuck the motto row right up under the wordmark. The stack gap is
+     2rem and the display face carries ~0.2em of descender air below the
+     glyphs, so this cancels both. */
+  margin-block-end: -2.4rem;
 }
 
 .sx-footer__cols {

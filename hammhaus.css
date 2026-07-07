@@ -483,6 +483,39 @@ a:hover {
   border-radius: var(--hh-radius);
 }
 
+/* Scrollable panels get a slim, surface-matched scrollbar instead of the
+   platform default, which glares on the ink code block. */
+.hh-code-block {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--hh-paper) 35%, transparent) transparent;
+}
+
+.hh-table-wrap {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, currentColor 30%, transparent) transparent;
+}
+
+.hh-code-block::-webkit-scrollbar,
+.hh-table-wrap::-webkit-scrollbar {
+  inline-size: 8px;
+  block-size: 8px;
+}
+
+.hh-code-block::-webkit-scrollbar-track,
+.hh-table-wrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.hh-code-block::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--hh-paper) 35%, transparent);
+  border-radius: var(--hh-radius-pill);
+}
+
+.hh-table-wrap::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: var(--hh-radius-pill);
+}
+
 .hh-rule {
   display: block;
   height: 1px;
