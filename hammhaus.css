@@ -951,7 +951,12 @@ a:hover {
   place-items: center;
   min-height: 10rem;
   margin: calc(var(--hh-space-5) * -1) calc(var(--hh-space-5) * -1) 0;
-  border-radius: var(--hh-radius) var(--hh-radius) 0 0;
+  /* The media bleeds to the card's padding box, whose corner curve is the
+     outer radius minus the border widths (1px sides, 4px accent top).
+     Matching it exactly stops card background peeking out at the corners. */
+  border-radius:
+    max(0px, calc(var(--hh-radius) - 1px)) max(0px, calc(var(--hh-radius) - 1px)) 0 0 /
+    max(0px, calc(var(--hh-radius) - 4px)) max(0px, calc(var(--hh-radius) - 4px)) 0 0;
   overflow: hidden;
   background:
     linear-gradient(135deg, var(--hh-red) 0 32%, transparent 32%),
@@ -1142,7 +1147,9 @@ a:hover {
 .hh-switch__track::before {
   content: "";
   position: absolute;
-  inset-block-start: 0.18rem;
+  /* Center the knob in the track's content box; a fixed offset would sit
+     it low because the track's border eats into the inner height. */
+  inset-block-start: calc(50% - (var(--hh-switch-size) - 0.36rem) / 2);
   inset-inline-start: 0.18rem;
   inline-size: calc(var(--hh-switch-size) - 0.36rem);
   block-size: calc(var(--hh-switch-size) - 0.36rem);

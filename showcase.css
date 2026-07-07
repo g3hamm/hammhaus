@@ -295,14 +295,28 @@
 .sx-blob--ring     { animation-delay: 560ms; }
 .sx-blob--triangle { animation-delay: 640ms; }
 
-/* The accent word underlines itself once the headline has landed. */
+/* The accent word underlines itself once the headline has landed — set a
+   touch off-axis, like a stroke of the press operator's china marker. */
 .sx-hero__title em {
-  background: linear-gradient(var(--hh-yellow), var(--hh-yellow)) 0 92% / 0% 0.1em no-repeat;
+  position: relative;
+}
+
+.sx-hero__title em::after {
+  content: "";
+  position: absolute;
+  left: 0.02em;
+  right: 0.08em;
+  bottom: 0.05em;
+  height: 0.09em;
+  z-index: -1;
+  background: var(--hh-yellow);
+  transform: rotate(-1.5deg) scaleX(0);
+  transform-origin: 0 50%;
   animation: sx-sweep 700ms 720ms var(--hh-ease) forwards;
 }
 
 @keyframes sx-sweep {
-  to { background-size: 100% 0.1em; }
+  to { transform: rotate(-1.5deg) scaleX(1); }
 }
 
 .sx-hero__title {
@@ -522,12 +536,20 @@
 }
 
 .sx-lab__controls {
+  /* The panel sits on a paper-3 surface inside the ink section, so it must
+     carry its own fg/line tokens — otherwise it inherits the section's
+     light-on-dark foreground and renders cream-on-cream. */
+  --hh-bg: var(--hh-paper-3);
+  --hh-fg: var(--hh-ink);
+  --hh-line: color-mix(in srgb, var(--hh-ink) 18%, transparent);
+  --hh-line-strong: color-mix(in srgb, var(--hh-ink) 35%, transparent);
   display: grid;
   gap: var(--hh-space-5);
   padding: var(--hh-space-5);
   border: 2px solid var(--hh-ink);
   border-radius: var(--hh-radius);
-  background: var(--hh-paper-3);
+  background: var(--hh-bg);
+  color: var(--hh-fg);
   box-shadow: var(--hh-shadow-hard);
   position: sticky;
   top: 6rem;
@@ -757,6 +779,13 @@
    Surface sampler (full bleed)
    ========================================================================== */
 
+/* The surfaces section skips .hh-section so its sampler can bleed
+   full-width, so it supplies its own head padding; the strip itself stays
+   flush against the next section on purpose. */
+#surfaces {
+  padding-block-start: var(--hh-space-8);
+}
+
 .sx-surfaces {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -887,6 +916,20 @@
 
 .sx-codeblock { position: relative; }
 
+/* The two side-by-side snippets in Start should read as one unit: stretch
+   both columns and let each code block fill its column's height. */
+#start .hh-split {
+  align-items: stretch;
+}
+
+#start .sx-codeblock {
+  display: grid;
+}
+
+#start .sx-codeblock .hh-code-block {
+  height: 100%;
+}
+
 .sx-copy-btn {
   position: absolute;
   top: 0.75rem;
@@ -970,6 +1013,8 @@
   font-size: clamp(3rem, 12vw, 8rem);
   line-height: 0.85;
   letter-spacing: var(--hh-tracking-hero);
+  /* Tuck the motto row up under the wordmark. */
+  margin-block-end: calc(var(--hh-space-4) * -1);
 }
 
 .sx-footer__cols {
