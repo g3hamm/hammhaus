@@ -25,6 +25,46 @@
     var(--hh-paper);
 }
 
+/* A whisper of film grain over everything — sells the "paper" in paper &
+   ink. Fixed so it reads as the sheet the page is printed on. */
+.sx-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.05;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") repeat 0 0 / 160px 160px;
+}
+
+/* Reading progress: a Bauhaus tricolor rule that grows across the top of
+   the viewport as you scroll. Pure CSS scroll-driven animation; browsers
+   without support simply never show it. */
+.sx-progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .sx-progress {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--hh-red) 0 38%, var(--hh-yellow) 38% 62%, var(--hh-blue) 62%);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    animation: sx-progress-grow auto linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes sx-progress-grow {
+  to { transform: scaleX(1); }
+}
+
 .sx-skip {
   position: fixed;
   top: 0.75rem;
@@ -209,6 +249,62 @@
 
 .sx-hero__grid > * { min-width: 0; }
 
+/* Entrance choreography: the headline column rises line by line, the
+   specimen card settles in, the deco shapes pop. Pure CSS, killed by the
+   global prefers-reduced-motion rule in hammhaus.css. */
+@keyframes sx-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+}
+
+@keyframes sx-pop {
+  from {
+    opacity: 0;
+    scale: 0.4;
+  }
+}
+
+.sx-hero .hh-stack > * {
+  animation: sx-rise 640ms var(--hh-ease) backwards;
+}
+
+.sx-hero .hh-stack > :nth-child(2) { animation-delay: 90ms; }
+.sx-hero .hh-stack > :nth-child(3) { animation-delay: 180ms; }
+.sx-hero .hh-stack > :nth-child(4) { animation-delay: 270ms; }
+.sx-hero .hh-stack > :nth-child(5) { animation-delay: 360ms; }
+
+.sx-specimen {
+  animation: sx-specimen-in 820ms 240ms var(--hh-ease) backwards;
+}
+
+@keyframes sx-specimen-in {
+  from {
+    opacity: 0;
+    transform: rotate(-1.5deg) translateY(34px) scale(0.97);
+  }
+}
+
+.sx-blob {
+  animation: sx-pop 700ms var(--hh-ease) backwards;
+}
+
+.sx-blob--circle   { animation-delay: 340ms; }
+.sx-blob--square   { animation-delay: 460ms; }
+.sx-blob--ring     { animation-delay: 560ms; }
+.sx-blob--triangle { animation-delay: 640ms; }
+
+/* The accent word underlines itself once the headline has landed. */
+.sx-hero__title em {
+  background: linear-gradient(var(--hh-yellow), var(--hh-yellow)) 0 92% / 0% 0.1em no-repeat;
+  animation: sx-sweep 700ms 720ms var(--hh-ease) forwards;
+}
+
+@keyframes sx-sweep {
+  to { background-size: 100% 0.1em; }
+}
+
 .sx-hero__title {
   font-family: var(--hh-font-display);
   font-weight: 900;
@@ -268,6 +364,11 @@
   border-radius: var(--hh-radius);
   box-shadow: var(--hh-shadow-hard);
   transform: rotate(-1.5deg);
+  transition: transform 320ms var(--hh-ease);
+}
+
+.sx-specimen:hover {
+  transform: rotate(0deg) translateY(-4px);
 }
 
 .sx-specimen__row {
@@ -363,6 +464,22 @@
   padding: 0;
   background: none;
   width: 100%;
+  transition: translate 200ms var(--hh-ease);
+}
+
+.sx-copyable:hover,
+.sx-copyable:focus-visible {
+  translate: 0 -4px;
+}
+
+.sx-copyable .hh-swatch {
+  transition: box-shadow 200ms var(--hh-ease), border-color 200ms var(--hh-ease);
+}
+
+.sx-copyable:hover .hh-swatch,
+.sx-copyable:focus-visible .hh-swatch {
+  border-color: currentColor;
+  box-shadow: var(--hh-shadow-soft);
 }
 
 .sx-swatch__color { position: relative; }
@@ -593,10 +710,41 @@
 .sx-spec__head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--hh-space-3);
   padding-bottom: var(--hh-space-3);
   border-bottom: 1px solid var(--hh-line);
+}
+
+.sx-spec__head h3 {
+  flex: 1;
+}
+
+/* "Copy HTML" — injected by JS on every spec card so any component's
+   markup is one click away. */
+.sx-spec__copy {
+  padding: 0.3rem 0.6rem;
+  font-family: var(--hh-font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--hh-line-strong);
+  border-radius: var(--hh-radius-pill);
+  cursor: copy;
+  white-space: nowrap;
+  transition: border-color 160ms var(--hh-ease), background-color 160ms var(--hh-ease);
+}
+
+.sx-spec__copy:hover {
+  border-color: currentColor;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.sx-spec__copy.is-copied {
+  background: var(--hh-yellow);
+  color: var(--hh-black);
+  border-color: var(--hh-black);
 }
 
 .sx-spec__demo {
@@ -837,6 +985,36 @@
 @media (max-width: 760px) { .sx-footer__cols { grid-template-columns: 1fr; } }
 
 /* ==========================================================================
+   Back to top
+   ========================================================================== */
+
+.sx-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 90;
+  background: var(--hh-ink);
+  color: var(--hh-paper);
+  border-color: var(--hh-ink);
+  opacity: 0;
+  translate: 0 0.75rem;
+  pointer-events: none;
+  transition: opacity 220ms var(--hh-ease), translate 220ms var(--hh-ease), background-color 180ms var(--hh-ease);
+}
+
+.sx-top:hover {
+  background: var(--hh-red);
+  border-color: var(--hh-red);
+  color: var(--hh-cream);
+}
+
+.sx-top.is-shown {
+  opacity: 1;
+  translate: none;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
    Toast (copy feedback)
    ========================================================================== */
 
@@ -867,5 +1045,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sx-reveal { opacity: 1; transform: none; transition: none; }
-  .sx-blob { transform: none !important; }
+  .sx-blob { translate: none !important; }
+  .sx-progress { display: none; }
 }

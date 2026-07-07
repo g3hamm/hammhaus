@@ -1160,6 +1160,13 @@ a:hover {
   transform: translateX(1.5rem);
 }
 
+/* The switch input is visually hidden, so keyboard focus must surface on
+   the track instead. */
+.hh-switch input:focus-visible + .hh-switch__track {
+  outline: 3px solid var(--hh-focus);
+  outline-offset: 3px;
+}
+
 .hh-range {
   appearance: none;
   -webkit-appearance: none;
@@ -1349,6 +1356,10 @@ a:hover {
 
 .hh-table tr:last-child td {
   border-bottom: 0;
+}
+
+.hh-table tbody tr:hover td {
+  background: color-mix(in srgb, currentColor 4%, transparent);
 }
 
 .hh-timeline {
@@ -1792,6 +1803,12 @@ a:hover {
   to {
     transform: translateX(-50%);
   }
+}
+
+/* Let readers stop the ticker to actually read it. */
+.hh-marquee:hover .hh-marquee__track,
+.hh-marquee:focus-within .hh-marquee__track {
+  animation-play-state: paused;
 }
 
 /* ==========================================================================

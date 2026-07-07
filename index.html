@@ -39,6 +39,7 @@
   </head>
   <body class="sx-page">
     <a class="hh-button hh-button--primary hh-button--small sx-skip" href="#main">Skip to content</a>
+    <div class="sx-progress" aria-hidden="true"></div>
 
     <div class="hh-cursor" aria-hidden="true">
       <span class="hh-cursor__ring"></span>
@@ -704,7 +705,8 @@
       <!-- =================================================================
            Surfaces (full bleed)
            ================================================================= -->
-      <section class="sx-section" aria-labelledby="surfaces-title">
+      <section class="sx-section" id="surfaces" aria-labelledby="surfaces-title">
+        <span class="sx-wm" aria-hidden="true">06</span>
         <div class="hh-container">
           <div class="sx-head sx-reveal">
             <span class="sx-head__index">06 / Surfaces</span>
@@ -1002,6 +1004,10 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
 
     <div class="sx-toast" role="status" aria-live="polite" id="sx-toast"></div>
 
+    <a class="hh-icon-button sx-top" href="#top" id="sx-top" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+    </a>
+
     <script>
       (() => {
         "use strict";
@@ -1047,6 +1053,39 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
               showToast("Copied " + value);
             }
           });
+        });
+
+        /* ---- Copy HTML per component card ------------------------------ */
+        const dedent = (html) => {
+          const lines = html.split("\n");
+          if (lines.length < 2) return html;
+          const rest = lines.slice(1).filter((l) => l.trim());
+          const indent = Math.min(...rest.map((l) => l.match(/^\s*/)[0].length));
+          return [lines[0], ...lines.slice(1).map((l) => l.slice(indent))].join("\n");
+        };
+
+        document.querySelectorAll(".sx-spec").forEach((spec) => {
+          const head = spec.querySelector(".sx-spec__head");
+          const demo = spec.querySelector(".sx-spec__demo") || head?.nextElementSibling;
+          if (!head || !demo) return;
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "sx-spec__copy";
+          btn.textContent = "Copy HTML";
+          btn.setAttribute("aria-label", "Copy this component's HTML");
+          btn.addEventListener("click", async () => {
+            const markup = dedent(demo.outerHTML)
+              .replace(/ ?\b(sx-spec__demo|sx-reveal|is-visible)\b/g, "")
+              .replace(/ class="\s*"/g, "")
+              .replace(/class=" +/g, 'class="');
+            if (await copyText(markup)) {
+              btn.textContent = "Copied ✓";
+              btn.classList.add("is-copied");
+              setTimeout(() => { btn.textContent = "Copy HTML"; btn.classList.remove("is-copied"); }, 1200);
+              showToast("Component HTML copied");
+            }
+          });
+          head.append(btn);
         });
 
         document.querySelectorAll("[data-copy-prev]").forEach((btn) => {
@@ -1160,6 +1199,19 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
           btn.addEventListener("click", () => document.getElementById(btn.dataset.dialogOpen)?.showModal());
         });
 
+        /* ---- Swatch hexes resolve to the active theme ------------------ */
+        const rgbToHex = (rgb) => {
+          const m = rgb.match(/\d+/g);
+          return m ? "#" + m.slice(0, 3).map((n) => (+n).toString(16).padStart(2, "0")).join("") : rgb;
+        };
+        const syncSwatches = () => {
+          document.querySelectorAll(".sx-copyable").forEach((el) => {
+            const color = el.querySelector(".hh-swatch__color");
+            const hex = el.querySelector(".hh-swatch__meta span:last-child");
+            if (color && hex) hex.textContent = rgbToHex(getComputedStyle(color).backgroundColor);
+          });
+        };
+
         /* ---- Theme toggle (follows OS until the user chooses) ---------- */
         const root = document.documentElement;
         const themeToggle = document.querySelector("[data-theme-toggle]");
@@ -1170,6 +1222,7 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
           themeToggle?.setAttribute("data-mode", mode);
           themeToggle?.setAttribute("aria-pressed", String(mode === "dark"));
           themeToggle?.setAttribute("aria-label", mode === "dark" ? "Switch to light mode" : "Switch to dark mode");
+          syncSwatches();
         };
         themeToggle?.addEventListener("click", () => {
           const next = effectiveTheme() === "dark" ? "light" : "dark";
@@ -1221,10 +1274,26 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
               const dy = (e.clientY - r.top) / r.height - 0.5;
               blobs.forEach((b) => {
                 const depth = +(b.dataset.depth || 0);
-                b.style.transform = `translate(${dx * depth}px, ${dy * depth}px)`;
+                /* Use the translate property so the square/triangle keep
+                   their CSS rotation (transform) intact. */
+                b.style.translate = `${dx * depth}px ${dy * depth}px`;
               });
             });
           }
+        }
+
+        /* ---- Back to top ----------------------------------------------- */
+        const topBtn = document.getElementById("sx-top");
+        if (topBtn) {
+          let ticking = false;
+          const syncTop = () => {
+            topBtn.classList.toggle("is-shown", window.scrollY > 900);
+            ticking = false;
+          };
+          window.addEventListener("scroll", () => {
+            if (!ticking) { ticking = true; requestAnimationFrame(syncTop); }
+          }, { passive: true });
+          syncTop();
         }
 
         /* ---- Custom cursor (system feature) --------------------------- */
