@@ -1,7 +1,7 @@
 # Hammhaus
 
 **A portable, token-driven CSS system. One stylesheet, zero dependencies.**
-Paper, ink, and primary-color conviction — an editorial Bauhaus look with
+Paper, ink, and spot-color conviction — an editorial print-shop look with
 enough component muscle to run a real product.
 
 > Motto: *Hamm follows form.*

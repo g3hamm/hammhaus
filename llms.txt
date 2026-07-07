@@ -1,8 +1,8 @@
 # Hammhaus
 
 > A portable, token-driven CSS design system. One stylesheet, zero runtime
-> dependencies, ~40 components. Editorial Bauhaus aesthetic: paper, ink, and
-> primary-color conviction. MIT licensed. Motto: "Hamm follows form."
+> dependencies, ~40 components. Editorial print-shop aesthetic: paper, ink, and
+> spot-color conviction. MIT licensed. Motto: "Hamm follows form."
 
 Hammhaus is plain CSS. There is no build step, no JavaScript requirement, and
 no framework. You style HTML by adding `hh-`prefixed classes, and you theme by
