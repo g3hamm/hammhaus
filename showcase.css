@@ -1039,6 +1039,14 @@
 }
 
 .sx-footer__cols nav { display: grid; gap: var(--hh-space-2); }
+
+/* The motto pill carries a built-in top margin, so drop the link columns
+   by the same amount to sit level with it (and clear of the wordmark). */
+@media (min-width: 761px) {
+  .sx-footer__cols nav {
+    padding-block-start: var(--hh-space-5);
+  }
+}
 .sx-footer__cols a { color: color-mix(in srgb, var(--hh-cream) 76%, transparent); text-decoration: none; width: fit-content; }
 .sx-footer__cols a:hover { color: var(--hh-cream); }
 
