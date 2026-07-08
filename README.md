@@ -87,10 +87,18 @@ to the tokens, classes, and conventions. Point your agent at it, or paste:
 
 ```
 Use the Hammhaus CSS system for styling.
-Stylesheet: https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/hammhaus.css
-Guide:      https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/llms.txt
+Stylesheet (for the <link> tag): https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/hammhaus.css
+Guide — any mirror works:
+  https://hammhaus.vercel.app/llms.txt
+  https://raw.githubusercontent.com/g3hamm/hammhaus/main/llms.txt
+  https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/llms.txt
 Style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS, no JS.
 ```
+
+> Sandboxed agents often can't fetch CDNs at all. The guide is mirrored on
+> GitHub and the site (see above) — or skip fetching entirely and paste the
+> contents of `llms.txt` straight into the prompt (the showcase has a
+> "Copy llms.txt" button for exactly this).
 
 ## What's in this repo
 

@@ -915,8 +915,13 @@
                 <span class="hh-label hh-mb-0">2 · Give it the guide</span>
                 <p class="hh-muted hh-mb-0">Point the agent at <a class="hh-accent" href="./llms.txt"><code class="hh-code">llms.txt</code></a> — a concise spec of tokens, classes, and rules of thumb written for LLMs.</p>
               </div>
+              <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);">
+                <span class="hh-label hh-mb-0">3 · Sandboxed agent? Still fine</span>
+                <p class="hh-muted hh-mb-0">Some agent sandboxes block CDN fetches. The guide is mirrored on GitHub and this site — or skip fetching entirely: copy <code class="hh-code">llms.txt</code> and paste it straight into the prompt.</p>
+              </div>
               <div class="hh-cluster">
                 <a class="hh-button hh-button--yellow" href="./llms.txt">View llms.txt</a>
+                <button class="hh-button hh-button--ghost" type="button" id="sx-copy-llms">Copy llms.txt</button>
                 <span class="hh-chip"><span class="hh-dot hh-dot--green"></span>MIT — no attribution required</span>
               </div>
             </div>
@@ -925,13 +930,16 @@
               <span class="hh-label">Paste this to your AI</span>
               <pre class="hh-code-block"><code id="sx-agent-snippet">Use the Hammhaus CSS system for styling.
 
-Add to &lt;head&gt;:
+Add to &lt;head&gt; (fetched by the browser, not you):
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/hammhaus.css"&gt;
 
-Full guide (tokens, classes, examples):
+Read the full guide (tokens, classes, rules) — any mirror works:
+https://hammhaus.vercel.app/llms.txt
+https://raw.githubusercontent.com/g3hamm/hammhaus/main/llms.txt
 https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/llms.txt
 
-Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS, no JS.</code></pre>
+Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS, no JS.
+If every fetch is blocked in your sandbox, ask me to paste llms.txt inline.</code></pre>
               <button class="sx-copy-btn" type="button" data-copy-prev style="top: 2.4rem;">Copy</button>
             </div>
           </div>
@@ -1199,6 +1207,17 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
 
           render();
         }
+
+        /* ---- Copy llms.txt (zero-fetch path for sandboxed agents) ------ */
+        document.getElementById("sx-copy-llms")?.addEventListener("click", async () => {
+          try {
+            const res = await fetch("./llms.txt");
+            if (!res.ok) throw new Error(res.status);
+            if (await copyText(await res.text())) showToast("llms.txt copied — paste it to your agent");
+          } catch {
+            showToast("Couldn't load llms.txt — open it and copy manually");
+          }
+        });
 
         /* ---- Dialog demo ----------------------------------------------- */
         document.querySelectorAll("[data-dialog-open]").forEach((btn) => {

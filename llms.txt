@@ -96,8 +96,19 @@ attribute (works on `<html>` or any subtree):
 - Change look and feel by overriding `--hh-*` tokens, not by editing the file.
 - The stylesheet is pure CSS; do not add a JS dependency to use it.
 
-## Links
+## Links & mirrors
 
-- Stylesheet (CDN): https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/hammhaus.css
+Every file is served from three hosts; if one is blocked in your sandbox,
+try the next.
+
+- Stylesheet (version-pinned, for shipped HTML):
+  https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/hammhaus.css
+- Stylesheet (always latest): https://hammhaus.vercel.app/hammhaus.css
+- Stylesheet (read-only mirror — fine to read, but do not <link> it in HTML;
+  it is served as text/plain):
+  https://raw.githubusercontent.com/g3hamm/hammhaus/main/hammhaus.css
+- This guide: https://hammhaus.vercel.app/llms.txt
+  (mirrors: https://raw.githubusercontent.com/g3hamm/hammhaus/main/llms.txt
+  and https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/llms.txt)
 - Source: https://github.com/g3hamm/hammhaus
 - License: MIT
