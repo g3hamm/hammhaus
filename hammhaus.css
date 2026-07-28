@@ -8,7 +8,7 @@
  * mode with <html data-hh-theme="dark"> or "light" (any subtree works).
  *
  * Hammhaus is a portable CSS system adapted from Geoffrey Hamm's
- * editorial portfolio stylesheet. It keeps the paper, ink, and Bauhaus
+ * editorial portfolio stylesheet. It keeps the paper, ink, and spot-color
  * accent language while removing project-specific scene behavior.
  *
  * Fonts: this system expects Archivo + JetBrains Mono. To keep the
@@ -483,6 +483,39 @@ a:hover {
   border-radius: var(--hh-radius);
 }
 
+/* Scrollable panels get a slim, surface-matched scrollbar instead of the
+   platform default, which glares on the ink code block. */
+.hh-code-block {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--hh-paper) 35%, transparent) transparent;
+}
+
+.hh-table-wrap {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, currentColor 30%, transparent) transparent;
+}
+
+.hh-code-block::-webkit-scrollbar,
+.hh-table-wrap::-webkit-scrollbar {
+  inline-size: 8px;
+  block-size: 8px;
+}
+
+.hh-code-block::-webkit-scrollbar-track,
+.hh-table-wrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.hh-code-block::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--hh-paper) 35%, transparent);
+  border-radius: var(--hh-radius-pill);
+}
+
+.hh-table-wrap::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: var(--hh-radius-pill);
+}
+
 .hh-rule {
   display: block;
   height: 1px;
@@ -695,7 +728,28 @@ a:hover {
   .hh-nav__links {
     width: 100%;
     overflow-x: auto;
-    padding-block-end: var(--hh-space-1);
+    /* overflow-x:auto computes the cross axis to auto as well, which makes
+       the strip scroll vertically by whatever pokes past the content box.
+       Pin it so the row only ever travels left/right, and stop the swipe
+       from chaining to the page (or Safari's back gesture) at the ends. */
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    padding-block-end: var(--hh-space-2);
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, currentColor 25%, transparent) transparent;
+  }
+
+  .hh-nav__links::-webkit-scrollbar {
+    block-size: 4px;
+  }
+
+  .hh-nav__links::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .hh-nav__links::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, currentColor 25%, transparent);
+    border-radius: var(--hh-radius-pill);
   }
 }
 
@@ -951,7 +1005,12 @@ a:hover {
   place-items: center;
   min-height: 10rem;
   margin: calc(var(--hh-space-5) * -1) calc(var(--hh-space-5) * -1) 0;
-  border-radius: var(--hh-radius) var(--hh-radius) 0 0;
+  /* The media bleeds to the card's padding box, whose corner curve is the
+     outer radius minus the border widths (1px sides, 4px accent top).
+     Matching it exactly stops card background peeking out at the corners. */
+  border-radius:
+    max(0px, calc(var(--hh-radius) - 1px)) max(0px, calc(var(--hh-radius) - 1px)) 0 0 /
+    max(0px, calc(var(--hh-radius) - 4px)) max(0px, calc(var(--hh-radius) - 4px)) 0 0;
   overflow: hidden;
   background:
     linear-gradient(135deg, var(--hh-red) 0 32%, transparent 32%),
@@ -1142,7 +1201,9 @@ a:hover {
 .hh-switch__track::before {
   content: "";
   position: absolute;
-  inset-block-start: 0.18rem;
+  /* Center the knob in the track's content box; a fixed offset would sit
+     it low because the track's border eats into the inner height. */
+  inset-block-start: calc(50% - (var(--hh-switch-size) - 0.36rem) / 2);
   inset-inline-start: 0.18rem;
   inline-size: calc(var(--hh-switch-size) - 0.36rem);
   block-size: calc(var(--hh-switch-size) - 0.36rem);
@@ -1158,6 +1219,13 @@ a:hover {
 .hh-switch input:checked + .hh-switch__track::before {
   background: var(--hh-black);
   transform: translateX(1.5rem);
+}
+
+/* The switch input is visually hidden, so keyboard focus must surface on
+   the track instead. */
+.hh-switch input:focus-visible + .hh-switch__track {
+  outline: 3px solid var(--hh-focus);
+  outline-offset: 3px;
 }
 
 .hh-range {
@@ -1349,6 +1417,10 @@ a:hover {
 
 .hh-table tr:last-child td {
   border-bottom: 0;
+}
+
+.hh-table tbody tr:hover td {
+  background: color-mix(in srgb, currentColor 4%, transparent);
 }
 
 .hh-timeline {
@@ -1792,6 +1864,12 @@ a:hover {
   to {
     transform: translateX(-50%);
   }
+}
+
+/* Let readers stop the ticker to actually read it. */
+.hh-marquee:hover .hh-marquee__track,
+.hh-marquee:focus-within .hh-marquee__track {
+  animation-play-state: paused;
 }
 
 /* ==========================================================================

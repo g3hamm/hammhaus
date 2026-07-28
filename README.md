@@ -1,12 +1,12 @@
 # Hammhaus
 
 **A portable, token-driven CSS system. One stylesheet, zero dependencies.**
-Paper, ink, and primary-color conviction — an editorial Bauhaus look with
+Paper, ink, and spot-color conviction — an editorial print-shop look with
 enough component muscle to run a real product.
 
 > Motto: *Hamm follows form.*
 
-[**Live style guide →**](https://github.com/g3hamm/hammhaus) · MIT licensed
+[**Live style guide →**](https://www.hammhaus.com) · MIT licensed
 
 ---
 
@@ -87,10 +87,18 @@ to the tokens, classes, and conventions. Point your agent at it, or paste:
 
 ```
 Use the Hammhaus CSS system for styling.
-Stylesheet: https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/hammhaus.css
-Guide:      https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/llms.txt
+Stylesheet (for the <link> tag): https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/hammhaus.css
+Guide — any mirror works:
+  https://www.hammhaus.com/llms.txt
+  https://raw.githubusercontent.com/g3hamm/hammhaus/main/llms.txt
+  https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/llms.txt
 Style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS, no JS.
 ```
+
+> Sandboxed agents often can't fetch CDNs at all. The guide is mirrored on
+> GitHub and the site (see above) — or skip fetching entirely and paste the
+> contents of `llms.txt` straight into the prompt (the showcase has a
+> "Copy llms.txt" button for exactly this).
 
 ## What's in this repo
 
@@ -100,6 +108,8 @@ Style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS, no JS.
 | `index.html` | The live style guide / showcase page. |
 | `showcase.css` | Page-only styles for the showcase (the `sx-` namespace). Not part of the system. |
 | `llms.txt` | Machine-readable guide for AI agents. |
+| `og-image.png` | Social share card (Open Graph / Twitter / LinkedIn). |
+| `og-image.html` | Generator page for the share card — screenshot it at 1200×630. |
 | `LICENSE` | MIT. |
 
 > `hammhaus.css` and `showcase.css` are deliberately separate: the first is the

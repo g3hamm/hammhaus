@@ -6,7 +6,7 @@
     <title>Hammhaus — a CSS system with a point of view</title>
     <meta
       name="description"
-      content="Hammhaus is a portable, token-driven CSS system. Paper, ink, and primary-color conviction. Hamm follows form."
+      content="Hammhaus is a portable, token-driven CSS system with print-shop conviction — paper, spot inks, and poster-grade type. Hamm follows form."
     >
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#f2ead9" media="(prefers-color-scheme: light)">
@@ -22,23 +22,30 @@
     </script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f2ead9'/%3E%3Ccircle cx='9' cy='9' r='6' fill='%23d83224'/%3E%3Crect x='17' y='3' width='12' height='12' fill='%23153b8a'/%3E%3Cpath d='M9 17 15 29 3 29Z' fill='%23f5c542'/%3E%3Ccircle cx='23' cy='23' r='5' fill='none' stroke='%23111' stroke-width='2'/%3E%3C/svg%3E">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hammhaus.com/">
     <meta property="og:title" content="Hammhaus — a CSS system with a point of view">
-    <meta property="og:description" content="A portable, token-driven CSS system. Paper, ink, and primary-color conviction. Free, MIT licensed. Hamm follows form.">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:description" content="A portable, token-driven CSS system with print-shop conviction — paper, spot inks, and poster-grade type. Free, MIT licensed. Hamm follows form.">
+    <meta property="og:image" content="https://www.hammhaus.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Hammhaus — Hamm follows form. A portable, token-driven CSS system.">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Hammhaus — a CSS system with a point of view">
-    <meta name="twitter:description" content="A portable, token-driven CSS system. Free, MIT licensed. Hamm follows form.">
+    <meta name="twitter:description" content="A portable, token-driven CSS system with print-shop conviction — paper, spot inks, and poster-grade type. Free, MIT licensed.">
+    <meta name="twitter:image" content="https://www.hammhaus.com/og-image.png">
     <script>document.documentElement.classList.replace("no-js", "js");</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,900;1,900&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&display=swap"
     >
     <link rel="stylesheet" href="./hammhaus.css">
     <link rel="stylesheet" href="./showcase.css">
   </head>
   <body class="sx-page">
     <a class="hh-button hh-button--primary hh-button--small sx-skip" href="#main">Skip to content</a>
+    <div class="sx-progress" aria-hidden="true"></div>
 
     <div class="hh-cursor" aria-hidden="true">
       <span class="hh-cursor__ring"></span>
@@ -93,14 +100,13 @@
         <div class="hh-container--wide sx-hero__grid">
           <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-5);">
             <span class="hh-kicker">A portable CSS system</span>
-            <h1 class="sx-hero__title">Hamm follows <em>form.</em></h1>
+            <h1 class="sx-hero__title">Hamm <i>follows</i> <em>form.</em></h1>
             <p class="hh-lede">
               One stylesheet. Zero dependencies. A complete vocabulary of tokens, type,
               and components with poster-grade presence — and the discipline to run a
               real product. Theme it by changing variables, not rewriting CSS.
             </p>
             <div class="hh-cluster" style="--hh-cluster-gap: var(--hh-space-3);">
-              <span class="hh-hero__motto">Hamm follows form</span>
               <a class="hh-button hh-button--primary hh-button--large" href="#playground">
                 Try the live playground
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
@@ -108,7 +114,7 @@
               <a class="hh-button hh-button--ghost hh-button--large" href="#components">See components</a>
             </div>
             <dl class="sx-hero__stats" aria-label="At a glance">
-              <div><dt>0</dt><dd>Runtime deps</dd></div>
+              <div><dt>0</dt><dd>Dependencies</dd></div>
               <div><dt>40+</dt><dd>Components</dd></div>
               <div><dt>100%</dt><dd>Pure CSS</dd></div>
             </dl>
@@ -137,14 +143,14 @@
           <div class="hh-marquee__track">
             <span class="hh-marquee__item"><span class="hh-dot hh-dot--red"></span>PAPER &amp; INK</span>
             <span class="hh-marquee__item"><span class="hh-dot hh-dot--blue"></span>TOKEN-DRIVEN</span>
-            <span class="hh-marquee__item"><span class="hh-dot hh-dot--yellow"></span>PRIMARY-COLOR CONVICTION</span>
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--yellow"></span>SPOT-COLOR CONVICTION</span>
             <span class="hh-marquee__item"><span class="hh-dot hh-dot--green"></span>PORTABLE BY DEFAULT</span>
-            <span class="hh-marquee__item"><span class="hh-dot hh-dot--plum"></span>HAMM FOLLOWS FORM</span>
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--plum"></span>HOT OFF THE PRESS</span>
             <span class="hh-marquee__item"><span class="hh-dot hh-dot--red"></span>PAPER &amp; INK</span>
             <span class="hh-marquee__item"><span class="hh-dot hh-dot--blue"></span>TOKEN-DRIVEN</span>
-            <span class="hh-marquee__item"><span class="hh-dot hh-dot--yellow"></span>PRIMARY-COLOR CONVICTION</span>
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--yellow"></span>SPOT-COLOR CONVICTION</span>
             <span class="hh-marquee__item"><span class="hh-dot hh-dot--green"></span>PORTABLE BY DEFAULT</span>
-            <span class="hh-marquee__item"><span class="hh-dot hh-dot--plum"></span>HAMM FOLLOWS FORM</span>
+            <span class="hh-marquee__item"><span class="hh-dot hh-dot--plum"></span>HOT OFF THE PRESS</span>
           </div>
         </div>
       </div>
@@ -197,7 +203,7 @@
             <span class="sx-head__index">02 / Tokens</span>
             <div class="sx-head__body">
               <h2 class="hh-display" id="tokens-title">Colors that know their job.</h2>
-              <p class="hh-lede sx-head__lead">Six core hues plus paper and ink. Tap any swatch to copy its custom property.</p>
+              <p class="hh-lede sx-head__lead">Eight inks on the rack: paper, ink, five spot colors, one muted. Tap any swatch to copy its custom property.</p>
             </div>
           </div>
 
@@ -277,7 +283,7 @@
             <form class="sx-lab__controls" aria-label="Theme controls">
               <div class="hh-cluster hh-justify-between">
                 <span class="sx-lab__seal" aria-hidden="true"></span>
-                <span class="hh-mono hh-muted">theme-press v1.2</span>
+                <span class="hh-mono hh-muted">theme-press v1.3</span>
               </div>
               <div class="sx-control">
                 <span class="hh-label hh-mb-0">Accent</span>
@@ -341,14 +347,14 @@
                 <div class="sx-preview__cards">
                   <article class="hh-card">
                     <h4 class="hh-subhead">A card</h4>
-                    <p class="hh-muted">Accent border, themed surface, consistent rhythm.</p>
+                    <p class="hh-muted">Reads every token in the room and dresses accordingly.</p>
                     <div class="hh-progress">
                       <div class="hh-progress__track"><span class="hh-progress__bar" style="--hh-progress: 68%;"></span></div>
                     </div>
                   </article>
                   <article class="hh-card hh-card--inverse">
                     <h4 class="hh-subhead">Inverse card</h4>
-                    <p class="hh-muted">Flips contrast while keeping the accent.</p>
+                    <p class="hh-muted">Same tokens, opposite mood. The accent stays loud.</p>
                     <a class="hh-button hh-button--ghost hh-button--small hh-w-fit" href="#playground">Action</a>
                   </article>
                 </div>
@@ -402,7 +408,7 @@
             </div>
             <div class="sx-type-row">
               <span class="hh-label">Section</span>
-              <span class="hh-section-title sx-type-row__demo">A confident section header.</span>
+              <span class="hh-section-title sx-type-row__demo">A section header that knows why it’s here.</span>
             </div>
             <div class="sx-type-row">
               <span class="hh-label">Subhead</span>
@@ -414,13 +420,13 @@
             </div>
             <div class="sx-type-row">
               <span class="hh-label">Mono</span>
-              <span class="hh-mono sx-type-row__demo" style="text-transform: none; font-size: 1rem;">JetBrains Mono · .hh-code · 0123456789</span>
+              <span class="hh-mono sx-type-row__demo" style="text-transform: none; font-size: 1rem;">1 stylesheet, 0 dependencies, 40+ components — the math checks out.</span>
             </div>
           </div>
 
           <div class="sx-tester sx-reveal">
             <span class="hh-label">Type tester — edit me</span>
-            <p class="sx-tester__field" contenteditable="true" spellcheck="false" role="textbox" aria-label="Editable headline">Hamm follows form.</p>
+            <p class="sx-tester__field" contenteditable="true" spellcheck="false" role="textbox" aria-label="Editable headline">Build with paper, ink, and guts.</p>
           </div>
         </div>
       </section>
@@ -466,7 +472,7 @@
 
             <!-- Form fields -->
             <article class="sx-spec">
-              <div class="sx-spec__head"><h3 class="hh-subhead">Form fields</h3><span class="hh-mono hh-muted">.hh-field</span></div>
+              <div class="sx-spec__head"><h3 class="hh-subhead">Form Fields</h3><span class="hh-mono hh-muted">.hh-field</span></div>
               <form class="hh-form sx-spec__demo" onsubmit="return false">
                 <label class="hh-field">
                   <span class="hh-label">Name</span>
@@ -516,18 +522,18 @@
                   <div class="hh-card__media" aria-hidden="true"></div>
                   <span class="hh-badge">Featured</span>
                   <h4 class="hh-subhead">Card with media</h4>
-                  <p class="hh-muted">A generated Bauhaus header, an accent rule, and room to breathe.</p>
+                  <p class="hh-muted">A masthead drawn in pure gradients — no image files, full poster energy.</p>
                 </div>
                 <div class="hh-card hh-card--inverse">
                   <h4 class="hh-subhead">Inverse card</h4>
-                  <p class="hh-muted">Flips to ink for emphasis in a quiet section.</p>
+                  <p class="hh-muted">Turns to ink when a quiet section needs one loud thing.</p>
                 </div>
               </div>
             </article>
 
             <!-- Badges, chips, dots -->
             <article class="sx-spec">
-              <div class="sx-spec__head"><h3 class="hh-subhead">Badges &amp; chips</h3><span class="hh-mono hh-muted">.hh-badge</span></div>
+              <div class="sx-spec__head"><h3 class="hh-subhead">Badges + Chips</h3><span class="hh-mono hh-muted">.hh-badge</span></div>
               <div class="sx-spec__demo">
                 <div class="hh-cluster">
                   <span class="hh-badge">Default</span>
@@ -562,22 +568,22 @@
 
             <!-- Progress + stats -->
             <article class="sx-spec">
-              <div class="sx-spec__head"><h3 class="hh-subhead">Progress &amp; stats</h3><span class="hh-mono hh-muted">.hh-progress</span></div>
+              <div class="sx-spec__head"><h3 class="hh-subhead">Progress + Stats</h3><span class="hh-mono hh-muted">.hh-progress</span></div>
               <div class="sx-spec__demo">
                 <div class="hh-progress">
-                  <div class="hh-cluster hh-justify-between"><span class="hh-label hh-mb-0">Coverage</span><span class="hh-mono">82%</span></div>
+                  <div class="hh-cluster hh-justify-between"><span class="hh-label hh-mb-0">Ink coverage</span><span class="hh-mono">82%</span></div>
                   <div class="hh-progress__track"><span class="hh-progress__bar" style="--hh-progress: 82%;"></span></div>
                 </div>
                 <div class="hh-stat-grid">
                   <div class="hh-stat"><span class="hh-stat__value">40+</span><span class="hh-stat__label">Components</span></div>
-                  <div class="hh-stat"><span class="hh-stat__value">7</span><span class="hh-stat__label">Core colors</span></div>
+                  <div class="hh-stat"><span class="hh-stat__value">8</span><span class="hh-stat__label">Inks on the rack</span></div>
                 </div>
               </div>
             </article>
 
             <!-- Tabs + segmented -->
             <article class="sx-spec">
-              <div class="sx-spec__head"><h3 class="hh-subhead">Tabs &amp; segmented</h3><span class="hh-mono hh-muted">interactive</span></div>
+              <div class="sx-spec__head"><h3 class="hh-subhead">Tabs + Segmented</h3><span class="hh-mono hh-muted">interactive</span></div>
               <div class="sx-spec__demo">
                 <div class="hh-tabs" role="tablist" aria-label="Example tabs" data-tabs>
                   <button class="hh-tab" type="button" role="tab" aria-selected="true">Build</button>
@@ -599,6 +605,7 @@
                 <details open><summary>Does it need JavaScript?</summary><div class="hh-accordion__body">No. The stylesheet is pure CSS; this page only adds JS for optional flourishes.</div></details>
                 <details><summary>How do I customize it?</summary><div class="hh-accordion__body">Override <code class="hh-code">--hh-*</code> tokens globally or per section, then keep the same classes.</div></details>
                 <details><summary>Can I adopt it gradually?</summary><div class="hh-accordion__body">Yes — every class is namespaced, so it won't collide with existing styles.</div></details>
+                <details><summary>Is this Bauhaus?</summary><div class="hh-accordion__body">No — the name's a pun. Hammhaus is a print-studio system: paper stock, spot inks, hard shadows, big type. If it reminds you of a poster more than a pane of glass, it's working.</div></details>
               </div>
             </article>
 
@@ -639,7 +646,7 @@
 
             <!-- People & waiting -->
             <article class="sx-spec">
-              <div class="sx-spec__head"><h3 class="hh-subhead">People &amp; waiting</h3><span class="hh-mono hh-muted">new in 1.2</span></div>
+              <div class="sx-spec__head"><h3 class="hh-subhead">People + Waiting</h3><span class="hh-mono hh-muted">new in 1.2</span></div>
               <div class="sx-spec__demo">
                 <div class="hh-cluster">
                   <ul class="hh-avatar-group" aria-label="Team">
@@ -652,7 +659,7 @@
                 </div>
                 <div class="hh-cluster">
                   <span class="hh-spinner" role="status" aria-label="Loading"></span>
-                  <span class="hh-mono hh-muted">Bauhaus spinner — conic, quartered</span>
+                  <span class="hh-mono hh-muted">Registration spinner — quartered, like a press mark</span>
                 </div>
                 <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);" aria-hidden="true">
                   <span class="hh-skeleton" style="max-width: 70%;"></span>
@@ -704,7 +711,8 @@
       <!-- =================================================================
            Surfaces (full bleed)
            ================================================================= -->
-      <section class="sx-section" aria-labelledby="surfaces-title">
+      <section class="sx-section" id="surfaces" aria-labelledby="surfaces-title">
+        <span class="sx-wm" aria-hidden="true">06</span>
         <div class="hh-container">
           <div class="sx-head sx-reveal">
             <span class="sx-head__index">06 / Surfaces</span>
@@ -763,9 +771,9 @@
                 <div class="hh-cluster hh-justify-between"><span class="hh-kicker">Studio</span><span class="hh-badge hh-badge--blue">Popular</span></div>
                 <p class="sx-price">$0<small> / forever</small></p>
                 <ul class="sx-feature-list">
-                  <li><span class="hh-dot hh-dot--green"></span> Every component</li>
-                  <li><span class="hh-dot hh-dot--green"></span> Full token set</li>
-                  <li><span class="hh-dot hh-dot--green"></span> MIT licensed</li>
+                  <li><span class="hh-dot hh-dot--green"></span> Every component, no velvet rope</li>
+                  <li><span class="hh-dot hh-dot--green"></span> The full token vocabulary</li>
+                  <li><span class="hh-dot hh-dot--green"></span> MIT licensed — take it home</li>
                 </ul>
                 <a class="hh-button hh-button--primary hh-button--block" href="./hammhaus.css" download="hammhaus.css">Download</a>
               </div>
@@ -774,10 +782,10 @@
             <!-- Login -->
             <article class="sx-tile sx-tile--login">
               <div class="sx-tile__pad">
-                <span class="hh-kicker">Welcome back</span>
+                <span class="hh-kicker">Members’ entrance</span>
                 <h3 class="hh-section-title">Sign in</h3>
                 <form class="hh-form" onsubmit="return false">
-                  <label class="hh-field"><span class="hh-label">Email</span><input class="hh-input" type="email" placeholder="you@studio.com"></label>
+                  <label class="hh-field"><span class="hh-label">Email</span><input class="hh-input" type="email" placeholder="walter@bauhaus.school"></label>
                   <label class="hh-field"><span class="hh-label">Password</span><input class="hh-input" type="password" value="••••••••"></label>
                   <button class="hh-button hh-button--primary hh-button--block" type="button">Continue</button>
                 </form>
@@ -787,9 +795,9 @@
             <!-- Stat panel -->
             <article class="sx-tile sx-tile--stat">
               <div class="sx-tile__pad">
-                <span class="hh-kicker">This week</span>
+                <span class="hh-kicker">The print run</span>
                 <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-4);">
-                  <div><p class="sx-price" style="font-size: 2.8rem;">+24%</p><span class="hh-stat__label">Conversion</span></div>
+                  <div><p class="sx-price" style="font-size: 2.8rem;">+24%</p><span class="hh-stat__label">Posters shipped</span></div>
                   <div class="hh-progress"><div class="hh-progress__track"><span class="hh-progress__bar" style="--hh-progress: 74%;"></span></div></div>
                   <span class="hh-chip hh-w-fit"><span class="hh-dot hh-dot--green"></span>On track</span>
                 </div>
@@ -858,8 +866,8 @@
 &lt;section class="hh-section hh-section--paper"&gt;
   &lt;div class="hh-container hh-stack"&gt;
     &lt;span class="hh-kicker"&gt;New project&lt;/span&gt;
-    &lt;h1 class="hh-display"&gt;Hamm follows form.&lt;/h1&gt;
-    &lt;p class="hh-lede"&gt;Build with paper, ink, and guts.&lt;/p&gt;
+    &lt;h1 class="hh-display"&gt;Build with paper, ink, and guts.&lt;/h1&gt;
+    &lt;p class="hh-lede"&gt;Set the tokens, ship the page.&lt;/p&gt;
     &lt;a class="hh-button hh-button--primary" href="#"&gt;Start&lt;/a&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre>
@@ -890,7 +898,7 @@
         <span class="sx-wm" aria-hidden="true">AI</span>
         <div class="hh-container">
           <div class="sx-head sx-reveal">
-            <span class="sx-head__index">09 / For your AI</span>
+            <span class="sx-head__index">09 / For Your AI Only</span>
             <div class="sx-head__body">
               <h2 class="hh-display" id="agents-title">Hand it to a coding agent.</h2>
               <p class="hh-lede sx-head__lead">Building with an AI? Point it at one hosted file and a machine-readable guide — it'll know the whole vocabulary.</p>
@@ -907,8 +915,13 @@
                 <span class="hh-label hh-mb-0">2 · Give it the guide</span>
                 <p class="hh-muted hh-mb-0">Point the agent at <a class="hh-accent" href="./llms.txt"><code class="hh-code">llms.txt</code></a> — a concise spec of tokens, classes, and rules of thumb written for LLMs.</p>
               </div>
+              <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-2);">
+                <span class="hh-label hh-mb-0">3 · Sandboxed agent? Still fine</span>
+                <p class="hh-muted hh-mb-0">Some agent sandboxes block CDN fetches. The guide is mirrored on GitHub and this site — or skip fetching entirely: copy <code class="hh-code">llms.txt</code> and paste it straight into the prompt.</p>
+              </div>
               <div class="hh-cluster">
                 <a class="hh-button hh-button--yellow" href="./llms.txt">View llms.txt</a>
+                <button class="hh-button hh-button--ghost" type="button" id="sx-copy-llms">Copy llms.txt</button>
                 <span class="hh-chip"><span class="hh-dot hh-dot--green"></span>MIT — no attribution required</span>
               </div>
             </div>
@@ -917,13 +930,16 @@
               <span class="hh-label">Paste this to your AI</span>
               <pre class="hh-code-block"><code id="sx-agent-snippet">Use the Hammhaus CSS system for styling.
 
-Add to &lt;head&gt;:
+Add to &lt;head&gt; (fetched by the browser, not you):
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/hammhaus.css"&gt;
 
-Full guide (tokens, classes, examples):
+Read the full guide (tokens, classes, rules) — any mirror works:
+https://www.hammhaus.com/llms.txt
+https://raw.githubusercontent.com/g3hamm/hammhaus/main/llms.txt
 https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/llms.txt
 
-Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS, no JS.</code></pre>
+Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS, no JS.
+If every fetch is blocked in your sandbox, ask me to paste llms.txt inline.</code></pre>
               <button class="sx-copy-btn" type="button" data-copy-prev style="top: 2.4rem;">Copy</button>
             </div>
           </div>
@@ -960,7 +976,7 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
         <div class="sx-footer__cols">
           <div class="hh-stack" style="--hh-stack-gap: var(--hh-space-3);">
             <span class="hh-hero__motto">Hamm follows form</span>
-            <p class="hh-muted">A portable, token-driven CSS system for editorial sites, landing pages, and crisp internal tools.</p>
+            <p class="hh-muted">A portable, token-driven CSS system with print-shop conviction — paper, spot inks, and poster-grade type.</p>
           </div>
           <nav aria-label="Sections">
             <span class="hh-label">Explore</span>
@@ -1001,6 +1017,10 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
     </dialog>
 
     <div class="sx-toast" role="status" aria-live="polite" id="sx-toast"></div>
+
+    <a class="hh-icon-button sx-top" href="#top" id="sx-top" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+    </a>
 
     <script>
       (() => {
@@ -1047,6 +1067,39 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
               showToast("Copied " + value);
             }
           });
+        });
+
+        /* ---- Copy HTML per component card ------------------------------ */
+        const dedent = (html) => {
+          const lines = html.split("\n");
+          if (lines.length < 2) return html;
+          const rest = lines.slice(1).filter((l) => l.trim());
+          const indent = Math.min(...rest.map((l) => l.match(/^\s*/)[0].length));
+          return [lines[0], ...lines.slice(1).map((l) => l.slice(indent))].join("\n");
+        };
+
+        document.querySelectorAll(".sx-spec").forEach((spec) => {
+          const head = spec.querySelector(".sx-spec__head");
+          const demo = spec.querySelector(".sx-spec__demo") || head?.nextElementSibling;
+          if (!head || !demo) return;
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "sx-spec__copy";
+          btn.textContent = "Copy HTML";
+          btn.setAttribute("aria-label", "Copy this component's HTML");
+          btn.addEventListener("click", async () => {
+            const markup = dedent(demo.outerHTML)
+              .replace(/ ?\b(sx-spec__demo|sx-reveal|is-visible)\b/g, "")
+              .replace(/ class="\s*"/g, "")
+              .replace(/class=" +/g, 'class="');
+            if (await copyText(markup)) {
+              btn.textContent = "Copied ✓";
+              btn.classList.add("is-copied");
+              setTimeout(() => { btn.textContent = "Copy HTML"; btn.classList.remove("is-copied"); }, 1200);
+              showToast("Component HTML copied");
+            }
+          });
+          head.append(btn);
         });
 
         document.querySelectorAll("[data-copy-prev]").forEach((btn) => {
@@ -1155,10 +1208,34 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
           render();
         }
 
+        /* ---- Copy llms.txt (zero-fetch path for sandboxed agents) ------ */
+        document.getElementById("sx-copy-llms")?.addEventListener("click", async () => {
+          try {
+            const res = await fetch("./llms.txt");
+            if (!res.ok) throw new Error(res.status);
+            if (await copyText(await res.text())) showToast("llms.txt copied — paste it to your agent");
+          } catch {
+            showToast("Couldn't load llms.txt — open it and copy manually");
+          }
+        });
+
         /* ---- Dialog demo ----------------------------------------------- */
         document.querySelectorAll("[data-dialog-open]").forEach((btn) => {
           btn.addEventListener("click", () => document.getElementById(btn.dataset.dialogOpen)?.showModal());
         });
+
+        /* ---- Swatch hexes resolve to the active theme ------------------ */
+        const rgbToHex = (rgb) => {
+          const m = rgb.match(/\d+/g);
+          return m ? "#" + m.slice(0, 3).map((n) => (+n).toString(16).padStart(2, "0")).join("") : rgb;
+        };
+        const syncSwatches = () => {
+          document.querySelectorAll(".sx-copyable").forEach((el) => {
+            const color = el.querySelector(".hh-swatch__color");
+            const hex = el.querySelector(".hh-swatch__meta span:last-child");
+            if (color && hex) hex.textContent = rgbToHex(getComputedStyle(color).backgroundColor);
+          });
+        };
 
         /* ---- Theme toggle (follows OS until the user chooses) ---------- */
         const root = document.documentElement;
@@ -1170,6 +1247,7 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
           themeToggle?.setAttribute("data-mode", mode);
           themeToggle?.setAttribute("aria-pressed", String(mode === "dark"));
           themeToggle?.setAttribute("aria-label", mode === "dark" ? "Switch to light mode" : "Switch to dark mode");
+          syncSwatches();
         };
         themeToggle?.addEventListener("click", () => {
           const next = effectiveTheme() === "dark" ? "light" : "dark";
@@ -1221,10 +1299,26 @@ Rules: style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS,
               const dy = (e.clientY - r.top) / r.height - 0.5;
               blobs.forEach((b) => {
                 const depth = +(b.dataset.depth || 0);
-                b.style.transform = `translate(${dx * depth}px, ${dy * depth}px)`;
+                /* Use the translate property so the square/triangle keep
+                   their CSS rotation (transform) intact. */
+                b.style.translate = `${dx * depth}px ${dy * depth}px`;
               });
             });
           }
+        }
+
+        /* ---- Back to top ----------------------------------------------- */
+        const topBtn = document.getElementById("sx-top");
+        if (topBtn) {
+          let ticking = false;
+          const syncTop = () => {
+            topBtn.classList.toggle("is-shown", window.scrollY > 900);
+            ticking = false;
+          };
+          window.addEventListener("scroll", () => {
+            if (!ticking) { ticking = true; requestAnimationFrame(syncTop); }
+          }, { passive: true });
+          syncTop();
         }
 
         /* ---- Custom cursor (system feature) --------------------------- */
