@@ -103,11 +103,11 @@ try the next.
 
 - Stylesheet (version-pinned, for shipped HTML):
   https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/hammhaus.css
-- Stylesheet (always latest): https://hammhaus.vercel.app/hammhaus.css
+- Stylesheet (always latest): https://www.hammhaus.com/hammhaus.css
 - Stylesheet (read-only mirror — fine to read, but do not <link> it in HTML;
   it is served as text/plain):
   https://raw.githubusercontent.com/g3hamm/hammhaus/main/hammhaus.css
-- This guide: https://hammhaus.vercel.app/llms.txt
+- This guide: https://www.hammhaus.com/llms.txt
   (mirrors: https://raw.githubusercontent.com/g3hamm/hammhaus/main/llms.txt
   and https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/llms.txt)
 - Source: https://github.com/g3hamm/hammhaus

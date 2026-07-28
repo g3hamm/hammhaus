@@ -6,7 +6,7 @@ enough component muscle to run a real product.
 
 > Motto: *Hamm follows form.*
 
-[**Live style guide →**](https://github.com/g3hamm/hammhaus) · MIT licensed
+[**Live style guide →**](https://www.hammhaus.com) · MIT licensed
 
 ---
 
@@ -89,7 +89,7 @@ to the tokens, classes, and conventions. Point your agent at it, or paste:
 Use the Hammhaus CSS system for styling.
 Stylesheet (for the <link> tag): https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/hammhaus.css
 Guide — any mirror works:
-  https://hammhaus.vercel.app/llms.txt
+  https://www.hammhaus.com/llms.txt
   https://raw.githubusercontent.com/g3hamm/hammhaus/main/llms.txt
   https://cdn.jsdelivr.net/gh/g3hamm/hammhaus@v1.3.0/llms.txt
 Style with hh- classes; theme by overriding --hh-* tokens; it's pure CSS, no JS.

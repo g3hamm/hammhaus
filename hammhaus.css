@@ -728,7 +728,28 @@ a:hover {
   .hh-nav__links {
     width: 100%;
     overflow-x: auto;
-    padding-block-end: var(--hh-space-1);
+    /* overflow-x:auto computes the cross axis to auto as well, which makes
+       the strip scroll vertically by whatever pokes past the content box.
+       Pin it so the row only ever travels left/right, and stop the swipe
+       from chaining to the page (or Safari's back gesture) at the ends. */
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    padding-block-end: var(--hh-space-2);
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, currentColor 25%, transparent) transparent;
+  }
+
+  .hh-nav__links::-webkit-scrollbar {
+    block-size: 4px;
+  }
+
+  .hh-nav__links::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .hh-nav__links::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, currentColor 25%, transparent);
+    border-radius: var(--hh-radius-pill);
   }
 }
 

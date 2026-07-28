@@ -142,7 +142,14 @@
   .sx-nav__links {
     width: 100%;
     overflow-x: auto;
-    padding-block-end: var(--hh-space-1);
+    /* Same cross-axis pin as the system nav (see hammhaus.css). The bottom
+       padding has to clear the active-link underline, which sits at
+       bottom: -0.4rem — otherwise overflow-y: hidden crops it. */
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    padding-block-end: 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, currentColor 25%, transparent) transparent;
   }
 }
 
